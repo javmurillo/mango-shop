@@ -1,8 +1,8 @@
-import Navbar from 'react-bootstrap/Navbar';
 import Nav from 'react-bootstrap/Nav';
-import logo from '../../logo.svg';
-import styled from 'styled-components';
+import Navbar from 'react-bootstrap/Navbar';
 import { NavLink } from 'react-router-dom';
+import styled from 'styled-components';
+import logo from '../../logo.svg';
 
 const StyledLogo = styled.img`
   height: 25px;
@@ -43,6 +43,15 @@ export const MangoNavbar = () => {
           </ul>
         </Nav>
       </Navbar.Collapse>
+      <Navbar.Brand>
+        <a
+          href="https://github.com/javmurillo/mango-shop"
+          target="_blank"
+          rel="noreferrer"
+        >
+          <StyledLogo src="/github-logo.png" alt="logo" />
+        </a>
+      </Navbar.Brand>
     </Navbar>
   );
 };
