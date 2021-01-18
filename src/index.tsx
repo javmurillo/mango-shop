@@ -9,12 +9,16 @@ import { Provider } from 'react-redux';
 import thunk from 'redux-thunk';
 import articlesReducer from './store/reducers/articles.reducer';
 import { ApplicationState } from './store/types/app.types';
+import { composeWithDevTools } from 'redux-devtools-extension';
 
 const rootReducer = combineReducers<ApplicationState>({
   articles: articlesReducer,
 });
 
-const store = createStore(rootReducer, applyMiddleware(thunk));
+const store = createStore(
+  rootReducer,
+  composeWithDevTools(applyMiddleware(thunk))
+);
 
 ReactDOM.render(
   <React.StrictMode>

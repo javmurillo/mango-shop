@@ -9,7 +9,7 @@ export const bulletStyles: BulletStyles = {
   handle: {
     position: 'absolute',
     display: 'inline-block',
-    cursor: 'pointer',
+    cursor: 'grab',
     height: 30,
     width: 30,
     backgroundColor: 'black',
@@ -29,7 +29,7 @@ export const bulletStyles: BulletStyles = {
   activeHandle: {
     backgroundColor: 'white',
     border: '2px solid #052350',
-    cursor: 'grab',
+    cursor: 'grabbing',
     boxShadow: 'inset 0px 0px 5px 0px gray',
     height: '35px',
     width: '35px',
