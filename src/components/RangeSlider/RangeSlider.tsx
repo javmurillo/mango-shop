@@ -17,8 +17,6 @@ export default class RangeSlider extends Component<
 > {
   public state: RangeSliderState;
   public factor = 1;
-  public trackLeft: number | undefined;
-  public trackOffset = 0;
 
   constructor(props: RangeSliderProps) {
     super(props);
@@ -55,9 +53,6 @@ export default class RangeSlider extends Component<
       this.setState({
         trackLength,
       });
-      this.trackOffset = Number(
-        track.offsetParent && (track.offsetParent as any).offsetLeft
-      );
     }
   };
 

@@ -58,7 +58,7 @@ export default class RangeBullet extends Component<
   onMouseDownBullet = (
     event: React.MouseEvent<HTMLDivElement, MouseEvent>
   ): void => {
-    this.moveStart(event, event.pageX);
+    this.setBulletToStartMoving(event, event.pageX);
   };
 
   onBulletMouseMove = (event: MouseEvent): void => {
@@ -77,7 +77,7 @@ export default class RangeBullet extends Component<
     }
   };
 
-  moveStart = (
+  setBulletToStartMoving = (
     event: MouseEvent | React.MouseEvent<HTMLDivElement, MouseEvent>,
     position: number
   ): void => {
