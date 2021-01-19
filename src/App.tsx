@@ -8,6 +8,7 @@ import {
 import styled from 'styled-components';
 import './App.css';
 import { MangoNavbar } from './components/Navbar/Navbar';
+import FixedValuesRange from './containers/FixedValuesRange/FixedValuesRange';
 import NormalRange from './containers/NormalRange/NormalRange';
 
 const StyledContainer = styled.main`
@@ -25,7 +26,9 @@ function App() {
             <Route path="/exercise1">
               <NormalRange />
             </Route>
-            <Route path="/exercise2"></Route>
+            <Route path="/exercise2">
+              <FixedValuesRange />
+            </Route>
             <Redirect exact from="/" to="/exercise1" />
           </Switch>
         </StyledContainer>
