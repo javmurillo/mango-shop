@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import Track from '../Track/Track';
+import Track from '../RangeTrack/RangeTrack';
 import RangeBullet from '../RangeBullet/RangeBullet';
 import styled from 'styled-components';
 import { RangeSliderProps } from './range-slider.props.interface';
@@ -17,7 +17,6 @@ export default class RangeSlider extends Component<
 > {
   public state: RangeSliderState;
   public factor = 1;
-  public step: number | number[];
   public startSteps: {
     left: number;
     right: number;
@@ -34,33 +33,30 @@ export default class RangeSlider extends Component<
     const start = props.rangeValue.start;
     const end = props.rangeValue.end;
     const step = props.step;
-    this.step = step;
-
     this.state = {
       start,
       end,
     };
+    let startLeftStep = step;
+    let startRightStep = step;
+    let endLeftStep = step;
+    let endRightStep = step;
     if (Array.isArray(step)) {
       this.startIndex = 0;
       this.endIndex = step.length - 1;
-      this.startSteps = {
-        left: 0,
-        right: step[this.startIndex! + 1] - step[this.startIndex!],
-      };
-      this.endSteps = {
-        left: step[this.endIndex!] - step[this.endIndex! - 1],
-        right: 0,
-      };
-    } else {
-      this.startSteps = {
-        left: step,
-        right: step,
-      };
-      this.endSteps = {
-        left: step,
-        right: step,
-      };
+      startLeftStep = 0;
+      startRightStep = step[this.startIndex! + 1] - step[this.startIndex!];
+      endLeftStep = step[this.endIndex!] - step[this.endIndex! - 1];
+      endRightStep = 0;
     }
+    this.startSteps = {
+      left: startLeftStep as number,
+      right: startRightStep as number,
+    };
+    this.endSteps = {
+      left: endLeftStep as number,
+      right: endRightStep as number,
+    };
   }
 
   static getDerivedStateFromProps(
@@ -102,48 +98,61 @@ export default class RangeSlider extends Component<
     }
   };
 
-  updateIndexes(increase: number, key: 'start' | 'end'): void {
+  updateIndexes(increase: number, step: number[], key: 'start' | 'end'): void {
     if (key === 'start') {
-      increase === 1 ? this.startIndex!++ : this.startIndex!--;
+      if (increase === 1 && this.startIndex! < step.length - 1) {
+        this.startIndex!++;
+      } else if (increase === -1 && this.startIndex! > 0) {
+        this.startIndex!--;
+      }
     } else if (key === 'end') {
-      increase === 1 ? this.endIndex!++ : this.endIndex!--;
+      if (increase === 1 && this.endIndex! < step.length - 1) {
+        this.endIndex!++;
+      } else if (increase === -1 && this.endIndex! > 0) {
+        this.endIndex!--;
+      }
     }
   }
 
   updateSteps(step: number[], key: 'start' | 'end'): void {
     if (key === 'start') {
+      const startLeftStep = step[this.startIndex!] - step[this.startIndex! - 1];
+      const startRightStep =
+        step[this.startIndex! + 1] - step[this.startIndex!];
       this.startSteps = {
-        left: step[this.startIndex!] - step[this.startIndex! - 1],
-        right: step[this.startIndex! + 1] - step[this.startIndex!],
+        left: !isNaN(startLeftStep) ? startLeftStep : 0,
+        right: !isNaN(startRightStep) ? startRightStep : 0,
       };
     } else if (key === 'end') {
+      const endRightStep = step[this.endIndex! + 1] - step[this.endIndex!];
+      const endLeftStep = step[this.endIndex!] - step[this.endIndex! - 1];
       this.endSteps = {
-        left: step[this.endIndex!] - step[this.endIndex! - 1],
-        right: step[this.endIndex! + 1] - step[this.endIndex!],
+        left: !isNaN(endLeftStep) ? endLeftStep : 0,
+        right: !isNaN(endRightStep) ? endRightStep : 0,
       };
     }
   }
 
   getStartStep(increase: number): number {
-    if (Array.isArray(this.step)) {
+    if (Array.isArray(this.props.step)) {
       return increase === 1 ? this.startSteps?.right : this.startSteps?.left;
     }
-    return this.step;
+    return this.props.step;
   }
 
   getEndStep(increase: number): number | undefined {
-    if (Array.isArray(this.step)) {
+    if (Array.isArray(this.props.step)) {
       return increase === 1 ? this.endSteps?.right : this.endSteps?.left;
     }
-    return this.step;
+    return this.props.step;
   }
 
   startHandleMove = (increase: number): void => {
     const { start } = this.state;
     const calculatedStep = this.getStartStep(increase);
-    if (Array.isArray(this.step)) {
-      this.updateIndexes(increase, 'start');
-      this.updateSteps(this.step as number[], 'start');
+    if (Array.isArray(this.props.step)) {
+      this.updateIndexes(increase, this.props.step, 'start');
+      this.updateSteps(this.props.step as number[], 'start');
     }
     const nextStart = start + increase * calculatedStep!;
     const updatedStart = this.getStartValue(nextStart);
@@ -156,11 +165,10 @@ export default class RangeSlider extends Component<
   endHandleMove = (increase: number): void => {
     const { end } = this.state;
     const calculatedStep = this.getEndStep(increase);
-    if (Array.isArray(this.step)) {
-      this.updateIndexes(increase, 'end');
-      this.updateSteps(this.step as number[], 'end');
+    if (Array.isArray(this.props.step)) {
+      this.updateIndexes(increase, this.props.step, 'end');
+      this.updateSteps(this.props.step as number[], 'end');
     }
-
     const nextEnd = end + increase * calculatedStep!;
     const updatedEnd = this.getEndValue(nextEnd);
     if (updatedEnd !== end) {
@@ -195,9 +203,11 @@ export default class RangeSlider extends Component<
   };
 
   onChange = (start: number, end: number): void => {
+    const parsedStart = Number(start.toFixed(2));
+    const parsedEnd = Number(end.toFixed(2));
     this.props.onChange({
-      start,
-      end,
+      start: parsedStart,
+      end: parsedEnd,
     });
   };
 

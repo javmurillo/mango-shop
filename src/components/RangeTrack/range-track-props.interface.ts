@@ -1,3 +1,3 @@
-export interface TrackProps {
+export interface RangeTrackProps {
   trackRef: (track: HTMLDivElement) => void;
 }

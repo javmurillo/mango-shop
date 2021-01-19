@@ -15,40 +15,23 @@ const StyledMainRange = styled.div`
 `;
 
 export default class Range extends Component<RangeProps, RangeState> {
-  public state: RangeState = {
-    rangeValue: {
-      start: 0,
-      end: 100,
-    },
-    min: 0,
-    max: 100,
-  };
+  public state: RangeState;
 
   constructor(props: RangeProps) {
     super(props);
-    const { min, max, step } = props;
+    let { min, max, step } = props;
     if (Array.isArray(step)) {
-      const stepArray = step as number[];
-      const minArray = stepArray[0];
-      const maxArray = stepArray[stepArray.length - 1];
-      this.state = {
-        min: minArray,
-        max: maxArray,
-        rangeValue: {
-          start: minArray,
-          end: maxArray,
-        },
-      };
-    } else {
-      this.state = {
-        min,
-        max,
-        rangeValue: {
-          start: min,
-          end: max,
-        },
-      };
+      min = step[0];
+      max = step[step.length - 1];
     }
+    this.state = {
+      min,
+      max,
+      rangeValue: {
+        start: min,
+        end: max,
+      },
+    };
   }
 
   private onChange = (rangeValue: { start: number; end: number }): void => {
@@ -56,7 +39,7 @@ export default class Range extends Component<RangeProps, RangeState> {
     this.props.onFilterArticles(rangeValue.start, rangeValue.end);
   };
 
-  private handleChange = (
+  private handleInputChange = (
     event: React.ChangeEvent<HTMLInputElement>,
     key: 'start' | 'end'
   ): void => {
@@ -64,21 +47,21 @@ export default class Range extends Component<RangeProps, RangeState> {
     const newValue = Number(target.value);
     const { min, max, rangeValue } = this.state;
     if (key === 'start') {
-      const canMoveStart =
-        newValue >= 0 && newValue >= min && newValue <= rangeValue.end;
-      if (canMoveStart) {
+      if (!newValue) {
+        this.patchState(key, min);
+      } else if (newValue >= min && newValue <= rangeValue.end) {
         this.patchState(key, newValue);
       }
-    } else {
-      const canMoveEnd =
-        newValue && newValue <= max && newValue >= rangeValue.start;
-      if (canMoveEnd) {
+    } else if (key === 'end') {
+      if (!newValue) {
+        this.patchState(key, max);
+      } else if (newValue <= max && newValue >= rangeValue.start) {
         this.patchState(key, newValue);
       }
     }
   };
 
-  private patchState(key: 'start' | 'end', value: number): void {
+  private patchState = (key: 'start' | 'end', value: number): void => {
     this.setState(
       previousState => ({
         ...previousState,
@@ -94,18 +77,17 @@ export default class Range extends Component<RangeProps, RangeState> {
         );
       }
     );
-  }
+  };
 
   render(): JSX.Element {
     return (
       <StyledMainRange>
         <RangeInput
-          onChange={this.handleChange}
+          onChange={this.handleInputChange}
           value={this.state.rangeValue.start}
           rangeKey="start"
           disabled={this.props.disableInputs}
         ></RangeInput>
-
         <RangeSlider
           min={this.state.min}
           max={this.state.max}
@@ -113,9 +95,8 @@ export default class Range extends Component<RangeProps, RangeState> {
           rangeValue={this.state.rangeValue}
           onChange={this.onChange}
         />
-
         <RangeInput
-          onChange={this.handleChange}
+          onChange={this.handleInputChange}
           value={this.state.rangeValue.end}
           rangeKey="end"
           disabled={this.props.disableInputs}
