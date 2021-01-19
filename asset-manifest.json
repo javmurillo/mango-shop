@@ -1,26 +1,26 @@
 {
   "files": {
     "main.css": "/mango-shop/static/css/main.31adf2bb.chunk.css",
-    "main.js": "/mango-shop/static/js/main.026d1b86.chunk.js",
-    "main.js.map": "/mango-shop/static/js/main.026d1b86.chunk.js.map",
+    "main.js": "/mango-shop/static/js/main.18b35538.chunk.js",
+    "main.js.map": "/mango-shop/static/js/main.18b35538.chunk.js.map",
     "runtime-main.js": "/mango-shop/static/js/runtime-main.da62ef84.js",
     "runtime-main.js.map": "/mango-shop/static/js/runtime-main.da62ef84.js.map",
     "static/css/2.ae9f1eb3.chunk.css": "/mango-shop/static/css/2.ae9f1eb3.chunk.css",
-    "static/js/2.f89d2e75.chunk.js": "/mango-shop/static/js/2.f89d2e75.chunk.js",
-    "static/js/2.f89d2e75.chunk.js.map": "/mango-shop/static/js/2.f89d2e75.chunk.js.map",
+    "static/js/2.c61eb538.chunk.js": "/mango-shop/static/js/2.c61eb538.chunk.js",
+    "static/js/2.c61eb538.chunk.js.map": "/mango-shop/static/js/2.c61eb538.chunk.js.map",
     "static/js/3.890cc64a.chunk.js": "/mango-shop/static/js/3.890cc64a.chunk.js",
     "static/js/3.890cc64a.chunk.js.map": "/mango-shop/static/js/3.890cc64a.chunk.js.map",
     "index.html": "/mango-shop/index.html",
     "static/css/2.ae9f1eb3.chunk.css.map": "/mango-shop/static/css/2.ae9f1eb3.chunk.css.map",
     "static/css/main.31adf2bb.chunk.css.map": "/mango-shop/static/css/main.31adf2bb.chunk.css.map",
-    "static/js/2.f89d2e75.chunk.js.LICENSE.txt": "/mango-shop/static/js/2.f89d2e75.chunk.js.LICENSE.txt",
+    "static/js/2.c61eb538.chunk.js.LICENSE.txt": "/mango-shop/static/js/2.c61eb538.chunk.js.LICENSE.txt",
     "static/media/logo.f676183c.svg": "/mango-shop/static/media/logo.f676183c.svg"
   },
   "entrypoints": [
     "static/js/runtime-main.da62ef84.js",
     "static/css/2.ae9f1eb3.chunk.css",
-    "static/js/2.f89d2e75.chunk.js",
+    "static/js/2.c61eb538.chunk.js",
     "static/css/main.31adf2bb.chunk.css",
-    "static/js/main.026d1b86.chunk.js"
+    "static/js/main.18b35538.chunk.js"
   ]
 }
