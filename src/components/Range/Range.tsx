@@ -14,10 +14,6 @@ const StyledMainRange = styled.div`
   margin-top: 16px;
 `;
 
-const StyledWrapperRange = styled.div`
-  width: 75%;
-`;
-
 export default class Range extends Component<RangeProps, RangeState> {
   public state: RangeState = {
     rangeValue: {

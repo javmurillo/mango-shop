@@ -7,7 +7,10 @@ import {
   filterArticles,
   initArticles,
 } from '../../store/reducers/articles/articles.actions';
+import { initRangeData } from '../../store/reducers/range/range-data.actions';
+import { ApplicationState } from '../../store/types/app.types';
 import { ArticleDispatchType } from '../../store/types/articles.types';
+import { RangeDataDispatchType } from '../../store/types/range-data.types';
 import { FixedValuesRangeProps } from './fixed-values-range-props.interface';
 
 class FixedValuesRange extends Component<FixedValuesRangeProps> {
@@ -20,7 +23,7 @@ class FixedValuesRange extends Component<FixedValuesRangeProps> {
   };
 
   render(): JSX.Element {
-    const { articles, error } = this.props;
+    const { articles, error } = this.props.articles;
     let articlesJsx = (
       <CustomSpinner error={error} message="Articles can't be loaded!" />
     );
@@ -43,10 +46,18 @@ class FixedValuesRange extends Component<FixedValuesRangeProps> {
   }
 }
 
-const mapStateToProps = (state: any) => {
+const mapStateToProps = (state: ApplicationState) => {
   return {
-    articles: state.articles && state.articles.articles,
-    error: state.articles && state.articles.error,
+    articles: {
+      articles: state.articles && state.articles.articles,
+      error: state.articles && state.articles.error,
+    },
+    rangeData: {
+      min: state.rangeData.min,
+      max: state.rangeData.max,
+      rangeValues: state.rangeData.rangeValues,
+      error: state.rangeData.error,
+    },
   };
 };
 
@@ -55,6 +66,7 @@ const mapDispatchToProps = (dispatch: any) => {
     onInitArticles: (): ArticleDispatchType => dispatch(initArticles()),
     onFilterArticles: (min: number, max: number): ArticleDispatchType =>
       dispatch(filterArticles(min, max)),
+    onInitRangeData: (): RangeDataDispatchType => dispatch(initRangeData()),
   };
 };
 

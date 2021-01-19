@@ -1,7 +1,5 @@
 import { Component } from 'react';
-import { Spinner } from 'react-bootstrap';
 import { connect } from 'react-redux';
-import styled from 'styled-components';
 import { ArticlesList } from '../../components/ArticlesList/ArticlesList';
 import Range from '../../components/Range/Range';
 import { CustomSpinner } from '../../components/Spinner/Spinner';
@@ -14,11 +12,6 @@ import { ApplicationState } from '../../store/types/app.types';
 import { ArticleDispatchType } from '../../store/types/articles.types';
 import { RangeDataDispatchType } from '../../store/types/range-data.types';
 import { NormalRangeProps } from './normal-range-props.interface';
-
-const StyledSpinnerWrapper = styled.div`
-  display: flex;
-  justify-content: center;
-`;
 
 class NormalRange extends Component<NormalRangeProps> {
   componentDidMount() {
