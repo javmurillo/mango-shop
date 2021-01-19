@@ -6,7 +6,7 @@ import { ArticlesList } from '../../components/ArticlesList/ArticlesList';
 import Range from '../../components/Range/Range';
 import {
   filterArticles,
-  initArticles
+  initArticles,
 } from '../../store/reducers/articles.actions';
 import { ArticleDispatchType } from '../../store/types/articles.types';
 import { NormalRangeProps } from './normal-range-props.interface';
@@ -46,7 +46,13 @@ class NormalRange extends Component<NormalRangeProps> {
     }
     return (
       <div>
-        <Range onFilterArticles={this.filterArticles} />
+        <Range
+          min={0}
+          max={100}
+          step={5}
+          onFilterArticles={this.filterArticles}
+          disableInputs={true}
+        />
         {articlesJsx}
       </div>
     );
