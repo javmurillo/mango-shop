@@ -27,6 +27,7 @@ export default class RangeInput extends Component<RangeInputProps> {
           onChange={ev => {
             this.props.onChange(ev, this.props.rangeKey);
           }}
+          disabled={this.props.disabled}
         />
         <StyledEuro>€</StyledEuro>
       </StyledInputWrapper>

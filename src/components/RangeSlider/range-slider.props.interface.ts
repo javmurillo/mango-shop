@@ -1,7 +1,7 @@
 export interface RangeSliderProps {
   min: number;
   max: number;
-  step: number;
+  step: number | number[];
   rangeValue: {
     start: number;
     end: number;

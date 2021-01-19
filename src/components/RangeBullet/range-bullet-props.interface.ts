@@ -8,5 +8,8 @@ export interface RangeBulletProps {
     | null
     | undefined;
   handleMove: (increase: number) => void;
-  step: number;
+  step: {
+    left: number;
+    right: number;
+  };
 }

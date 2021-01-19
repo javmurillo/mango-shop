@@ -4,6 +4,7 @@ import RangeBullet from '../RangeBullet/RangeBullet';
 import styled from 'styled-components';
 import { RangeSliderProps } from './range-slider.props.interface';
 import { RangeSliderState } from './range-slider.state.interface';
+import { parseConfigFileTextToJson } from 'typescript';
 
 const StyledRangeSlider = styled.div`
   position: relative;
@@ -17,15 +18,50 @@ export default class RangeSlider extends Component<
 > {
   public state: RangeSliderState;
   public factor = 1;
+  public step: number | number[];
+  public startSteps: {
+    left: number;
+    right: number;
+  };
+  public endSteps: {
+    left: number;
+    right: number;
+  };
+  public startIndex?: number;
+  public endIndex?: number;
 
   constructor(props: RangeSliderProps) {
     super(props);
     const start = props.rangeValue.start;
     const end = props.rangeValue.end;
+    const step = props.step;
+    this.step = step;
+
     this.state = {
       start,
       end,
     };
+    if (Array.isArray(step)) {
+      this.startIndex = 0;
+      this.endIndex = step.length - 1;
+      this.startSteps = {
+        left: 0,
+        right: step[this.startIndex! + 1] - step[this.startIndex!],
+      };
+      this.endSteps = {
+        left: step[this.endIndex!] - step[this.endIndex! - 1],
+        right: 0,
+      };
+    } else {
+      this.startSteps = {
+        left: step,
+        right: step,
+      };
+      this.endSteps = {
+        left: step,
+        right: step,
+      };
+    }
   }
 
   static getDerivedStateFromProps(
@@ -67,10 +103,50 @@ export default class RangeSlider extends Component<
     }
   };
 
+  updateIndexes(increase: number, key: 'start' | 'end'): void {
+    if (key === 'start') {
+      increase === 1 ? this.startIndex!++ : this.startIndex!--;
+    } else if (key === 'end') {
+      increase === 1 ? this.endIndex!++ : this.endIndex!--;
+    }
+  }
+
+  updateSteps(step: number[], key: 'start' | 'end'): void {
+    if (key === 'start') {
+      this.startSteps = {
+        left: step[this.startIndex!] - step[this.startIndex! - 1],
+        right: step[this.startIndex! + 1] - step[this.startIndex!],
+      };
+    } else if (key === 'end') {
+      this.endSteps = {
+        left: step[this.endIndex!] - step[this.endIndex! - 1],
+        right: step[this.endIndex! + 1] - step[this.endIndex!],
+      };
+    }
+  }
+
+  getStartStep(increase: number): number {
+    if (Array.isArray(this.step)) {
+      return increase === 1 ? this.startSteps?.right : this.startSteps?.left;
+    }
+    return this.step;
+  }
+
+  getEndStep(increase: number): number | undefined {
+    if (Array.isArray(this.step)) {
+      return increase === 1 ? this.endSteps?.right : this.endSteps?.left;
+    }
+    return this.step;
+  }
+
   startHandleMove = (increase: number): void => {
-    const { step } = this.props;
     const { start } = this.state;
-    const nextStart = start + increase * step;
+    const calculatedStep = this.getStartStep(increase);
+    if (Array.isArray(this.step)) {
+      this.updateIndexes(increase, 'start');
+      this.updateSteps(this.step as number[], 'start');
+    }
+    const nextStart = start + increase * calculatedStep!;
     const updatedStart = this.getStartValue(nextStart);
     if (updatedStart !== start) {
       this.updateState(updatedStart, this.state.end);
@@ -79,9 +155,14 @@ export default class RangeSlider extends Component<
   };
 
   endHandleMove = (increase: number): void => {
-    const { step } = this.props;
     const { end } = this.state;
-    const nextEnd = end + increase * step;
+    const calculatedStep = this.getEndStep(increase);
+    if (Array.isArray(this.step)) {
+      this.updateIndexes(increase, 'end');
+      this.updateSteps(this.step as number[], 'end');
+    }
+
+    const nextEnd = end + increase * calculatedStep!;
     const updatedEnd = this.getEndValue(nextEnd);
     if (updatedEnd !== end) {
       this.updateState(this.state.start, updatedEnd);
@@ -126,7 +207,7 @@ export default class RangeSlider extends Component<
     let endValue = 0;
     let percentageFactor = 1;
     const { handleSize, trackLength, start, end } = this.state;
-    const { min, max, step } = this.props;
+    const { min, max } = this.props;
     if (trackLength && handleSize) {
       const calculatedTrackWidth = trackLength - handleSize;
       this.factor = calculatedTrackWidth / (max - min);
@@ -142,14 +223,14 @@ export default class RangeSlider extends Component<
           handleRef={this.setHandleSize}
           handleMove={this.startHandleMove}
           factor={this.factor}
-          step={step}
+          step={this.startSteps}
         />
         <RangeBullet
           offset={`${endValue * percentageFactor}%`}
           handleRef={this.setHandleSize}
           handleMove={this.endHandleMove}
           factor={this.factor}
-          step={step}
+          step={this.endSteps}
         />
       </StyledRangeSlider>
     );

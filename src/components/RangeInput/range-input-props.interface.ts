@@ -5,4 +5,5 @@ export interface RangeInputProps {
     key: 'start' | 'end'
   ) => void;
   rangeKey: 'start' | 'end';
+  disabled: boolean;
 }

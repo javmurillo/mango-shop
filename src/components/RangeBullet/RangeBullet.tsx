@@ -100,11 +100,11 @@ export default class RangeBullet extends Component<
     const { factor, step, handleMove } = this.props;
     const direction = position - this.lastPos!;
     const distance = position - this.currentPos!;
-
     const increment = direction > 0 ? 1 : -1;
-    if (direction * distance > (factor || 1) * step) {
+    const directionStep = increment === 1 ? step.right : step.left;
+    if (direction * distance > (factor || 1) * directionStep) {
       handleMove(increment);
-      this.currentPos! += factor * step * increment;
+      this.currentPos! += factor * directionStep * increment;
     }
     this.lastPos = position;
   };

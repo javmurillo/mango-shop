@@ -28,6 +28,33 @@ export default class Range extends Component<RangeProps, RangeState> {
     max: 100,
   };
 
+  constructor(props: RangeProps) {
+    super(props);
+    const { min, max, step } = props;
+    if (Array.isArray(step)) {
+      const stepArray = step as number[];
+      const minArray = stepArray[0];
+      const maxArray = stepArray[stepArray.length - 1];
+      this.state = {
+        min: minArray,
+        max: maxArray,
+        rangeValue: {
+          start: minArray,
+          end: maxArray,
+        },
+      };
+    } else {
+      this.state = {
+        min,
+        max,
+        rangeValue: {
+          start: min,
+          end: max,
+        },
+      };
+    }
+  }
+
   private onChange = (rangeValue: { start: number; end: number }): void => {
     this.setState({ rangeValue });
     this.props.onFilterArticles(rangeValue.start, rangeValue.end);
@@ -74,20 +101,20 @@ export default class Range extends Component<RangeProps, RangeState> {
   }
 
   render(): JSX.Element {
-    const { rangeValue } = this.state;
     return (
       <StyledMainRange>
         <RangeInput
           onChange={this.handleChange}
           value={this.state.rangeValue.start}
           rangeKey="start"
+          disabled={this.props.disableInputs}
         ></RangeInput>
         <StyledWrapperRange>
           <RangeSlider
             min={this.state.min}
             max={this.state.max}
-            step={5}
-            rangeValue={rangeValue}
+            step={this.props.step}
+            rangeValue={this.state.rangeValue}
             onChange={this.onChange}
           />
         </StyledWrapperRange>
@@ -95,6 +122,7 @@ export default class Range extends Component<RangeProps, RangeState> {
           onChange={this.handleChange}
           value={this.state.rangeValue.end}
           rangeKey="end"
+          disabled={this.props.disableInputs}
         ></RangeInput>
       </StyledMainRange>
     );
