@@ -7,6 +7,6 @@ export interface RangeBulletProps {
     | React.RefObject<HTMLDivElement>
     | null
     | undefined;
-  handleMove: Function;
+  handleMove: (increase: number) => void;
   step: number;
 }

@@ -6,5 +6,5 @@ export interface RangeSliderProps {
     start: number;
     end: number;
   };
-  onChange?: Function;
+  onChange: (rangeValue: { start: number; end: number }) => void;
 }

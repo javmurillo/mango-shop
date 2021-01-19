@@ -86,7 +86,7 @@ export default class Range extends Component<RangeProps, RangeState> {
           <RangeSlider
             min={this.state.min}
             max={this.state.max}
-            step={1}
+            step={5}
             rangeValue={rangeValue}
             onChange={this.onChange}
           />

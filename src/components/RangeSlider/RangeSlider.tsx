@@ -18,8 +18,6 @@ export default class RangeSlider extends Component<
   public state: RangeSliderState;
   public factor = 1;
   public trackLeft: number | undefined;
-  public start: number | undefined;
-  public end: number | undefined;
   public trackOffset = 0;
 
   constructor(props: RangeSliderProps) {
@@ -51,7 +49,7 @@ export default class RangeSlider extends Component<
     return null;
   }
 
-  _setTrackDimensions = (track: HTMLDivElement): void => {
+  setTrackDimensions = (track: HTMLDivElement): void => {
     if (track) {
       const trackLength = track.clientWidth;
       this.setState({
@@ -63,7 +61,7 @@ export default class RangeSlider extends Component<
     }
   };
 
-  _setHandleSize = (bullet: HTMLDivElement | null): void => {
+  setHandleSize = (bullet: HTMLDivElement | null): void => {
     if (bullet) {
       const handleSize = bullet.clientWidth;
       if (!this.state.handleSize) {
@@ -74,69 +72,58 @@ export default class RangeSlider extends Component<
     }
   };
 
-  _startHandleMove = (increase: number): void => {
+  startHandleMove = (increase: number): void => {
     const { step } = this.props;
     const { start } = this.state;
-    const newStart = this._getStartValue(start + increase * step);
-    if (newStart !== start) {
-      this._updateState(newStart, this.state.end);
-      this._onChange(newStart, this.state.end);
+    const nextStart = start + increase * step;
+    const updatedStart = this.getStartValue(nextStart);
+    if (updatedStart !== start) {
+      this.updateState(updatedStart, this.state.end);
+      this.onChange(updatedStart, this.state.end);
     }
   };
 
-  _endHandleMove = (increase: number): void => {
+  endHandleMove = (increase: number): void => {
     const { step } = this.props;
     const { end } = this.state;
-    const newEnd = this._getEndValue(end + increase * step);
-    if (newEnd !== end) {
-      this._updateState(this.state.start, newEnd);
-      this._onChange(this.state.start, newEnd);
+    const nextEnd = end + increase * step;
+    const updatedEnd = this.getEndValue(nextEnd);
+    if (updatedEnd !== end) {
+      this.updateState(this.state.start, updatedEnd);
+      this.onChange(this.state.start, updatedEnd);
     }
   };
 
-  _getStepValue = (position: number) => {
-    const { step } = this.props;
-    const remainder = position % step;
-    if (remainder < step / 2) {
-      return position - remainder;
+  getStartValue(nextStart: number): number {
+    if (nextStart < this.props.min) {
+      return this.props.min;
+    } else if (nextStart > this.state.end) {
+      return this.state.end;
     }
-    return position - remainder + step;
-  };
-
-  _getStartValue(start: number): number {
-    let startValue = start;
-    if (startValue < this.props.min) {
-      startValue = this.props.min;
-    } else if (startValue > this.state.end) {
-      startValue = this.state.end;
-    }
-    return startValue;
+    return nextStart;
   }
 
-  _getEndValue(end: number): number {
-    let endValue = end;
-    if (endValue > this.props.max) {
-      endValue = this.props.max;
-    } else if (endValue < this.state.start) {
-      endValue = this.state.start;
+  getEndValue(nextEnd: number): number {
+    if (nextEnd > this.props.max) {
+      return this.props.max;
+    } else if (nextEnd < this.state.start) {
+      return this.state.start;
     }
-    return endValue;
+    return nextEnd;
   }
 
-  _updateState = (start: number, end: number): void => {
+  updateState = (start: number, end: number): void => {
     this.setState({
       start,
       end,
     });
   };
 
-  _onChange = (start: number, end: number): void => {
-    if (this.props.onChange) {
-      this.props.onChange({
-        start,
-        end,
-      });
-    }
+  onChange = (start: number, end: number): void => {
+    this.props.onChange({
+      start,
+      end,
+    });
   };
 
   render(): Object {
@@ -145,44 +132,27 @@ export default class RangeSlider extends Component<
     let percentageFactor = 1;
     const { handleSize, trackLength, start, end } = this.state;
     const { min, max, step } = this.props;
-    this.start = start;
-    this.end = end;
     if (trackLength && handleSize) {
       const calculatedTrackWidth = trackLength - handleSize;
       this.factor = calculatedTrackWidth / (max - min);
-      if (this.start < min || this.end < min) {
-        startValue = min;
-      } else if (this.start > Math.min(this.end, max)) {
-        startValue = Math.min(this.end, max);
-      } else {
-        startValue = this.start;
-      }
-      startValue = (startValue - min) * this.factor;
-      if (this.end > max || this.start > max) {
-        endValue = max;
-      } else if (this.end < Math.max(start, min)) {
-        endValue = Math.max(start, min);
-      } else {
-        endValue = this.end;
-      }
-      endValue = (endValue - min) * this.factor;
+      startValue = (start - min) * this.factor;
+      endValue = (end - min) * this.factor;
       percentageFactor = 100 / trackLength;
     }
-
     return (
       <StyledRangeSlider>
-        <Track trackRef={this._setTrackDimensions} />
+        <Track trackRef={this.setTrackDimensions} />
         <RangeBullet
           offset={`${startValue * percentageFactor}%`}
-          handleRef={this._setHandleSize}
-          handleMove={this._startHandleMove}
+          handleRef={this.setHandleSize}
+          handleMove={this.startHandleMove}
           factor={this.factor}
           step={step}
         />
         <RangeBullet
           offset={`${endValue * percentageFactor}%`}
-          handleRef={this._setHandleSize}
-          handleMove={this._endHandleMove}
+          handleRef={this.setHandleSize}
+          handleMove={this.endHandleMove}
           factor={this.factor}
           step={step}
         />
