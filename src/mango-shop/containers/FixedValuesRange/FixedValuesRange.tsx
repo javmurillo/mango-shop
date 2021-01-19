@@ -1,4 +1,4 @@
-import { Component } from 'react';
+import { Component, Dispatch } from 'react';
 import { connect } from 'react-redux';
 import { ApplicationState } from '../../..';
 import { ArticlesList } from '../../../libs/articles/components/ArticlesList/ArticlesList';

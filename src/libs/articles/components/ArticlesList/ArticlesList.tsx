@@ -7,7 +7,7 @@ const StyledDiv = styled.div`
   justify-content: center;
 `;
 
-export const ArticlesList = (props: ArticlesListProps) => {
+export const ArticlesList = (props: ArticlesListProps): JSX.Element => {
   return (
     <StyledDiv className="row">
       {props.articlesList.map((article: ArticleDto) => {

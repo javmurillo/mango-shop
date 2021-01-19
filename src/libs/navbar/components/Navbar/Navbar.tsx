@@ -8,7 +8,7 @@ const StyledLogo = styled.img`
   height: 25px;
 `;
 
-export const MangoNavbar = () => {
+export const MangoNavbar = (): JSX.Element => {
   return (
     <Navbar bg="light" expand="lg">
       <Navbar.Brand>

@@ -241,7 +241,7 @@ export default class RangeSlider extends Component<
     });
   };
 
-  render(): Object {
+  render(): JSX.Element {
     let startValue = 0;
     let endValue = 0;
     let percentageFactor = 1;

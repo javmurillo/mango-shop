@@ -30,7 +30,7 @@ const StyledCardFooter = styled(Card.Footer)`
   border: none;
 `;
 
-export const Article = (props: { article: ArticleDto }) => {
+export const Article = (props: { article: ArticleDto }): JSX.Element => {
   const { article } = props;
   return (
     <StyledCard>
