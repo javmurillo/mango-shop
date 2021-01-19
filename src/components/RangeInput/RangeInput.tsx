@@ -27,6 +27,7 @@ export default class RangeInput extends Component<RangeInputProps> {
           onChange={ev => {
             this.props.onChange(ev, this.props.rangeKey);
           }}
+          style={this.props.disabled ? { cursor: 'not-allowed' } : {}}
           disabled={this.props.disabled}
         />
         <StyledEuro>€</StyledEuro>
