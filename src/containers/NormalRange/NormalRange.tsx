@@ -4,6 +4,7 @@ import { connect } from 'react-redux';
 import styled from 'styled-components';
 import { ArticlesList } from '../../components/ArticlesList/ArticlesList';
 import Range from '../../components/Range/Range';
+import { CustomSpinner } from '../../components/Spinner/Spinner';
 import {
   filterArticles,
   initArticles,
@@ -31,18 +32,8 @@ class NormalRange extends Component<NormalRangeProps> {
 
   render(): JSX.Element {
     const { articles, error } = this.props.articles;
-    let articlesJsx = error ? (
-      <p>Articles can't be loaded!</p>
-    ) : (
-      <StyledSpinnerWrapper>
-        <Spinner
-          animation="border"
-          role="status"
-          style={{ textAlign: 'center' }}
-        >
-          <span className="sr-only">Loading...</span>
-        </Spinner>
-      </StyledSpinnerWrapper>
+    let articlesJsx = (
+      <CustomSpinner error={error} message="Articles can't be loaded!" />
     );
 
     if (articles) {
