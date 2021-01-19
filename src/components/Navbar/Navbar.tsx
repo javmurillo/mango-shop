@@ -2,7 +2,7 @@ import Nav from 'react-bootstrap/Nav';
 import Navbar from 'react-bootstrap/Navbar';
 import { NavLink } from 'react-router-dom';
 import styled from 'styled-components';
-import logo from '../../logo.svg';
+import mangoLogo from '../../logo.svg';
 
 const StyledLogo = styled.img`
   height: 25px;
@@ -13,7 +13,7 @@ export const MangoNavbar = () => {
     <Navbar bg="light" expand="lg">
       <Navbar.Brand>
         <a href="https://shop.mango.com/" target="_blank" rel="noreferrer">
-          <StyledLogo src={logo} alt="logo" />
+          <StyledLogo src={mangoLogo} alt="logo" />
         </a>
       </Navbar.Brand>
       <Navbar.Toggle aria-controls="basic-navbar-nav" />
@@ -49,7 +49,10 @@ export const MangoNavbar = () => {
           target="_blank"
           rel="noreferrer"
         >
-          <StyledLogo src="/github-logo.png" alt="logo" />
+          <StyledLogo
+            src={process.env.PUBLIC_URL + '/github-logo.png'}
+            alt="logo"
+          />
         </a>
       </Navbar.Brand>
     </Navbar>
