@@ -6,7 +6,7 @@ import {
   FilterArticlesAction,
   Article,
   ArticleAction,
-} from '../types/articles.types';
+} from '../../types/articles.types';
 
 export interface ArticlesState {
   articles?: Article[];

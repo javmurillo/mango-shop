@@ -7,8 +7,11 @@ import Range from '../../components/Range/Range';
 import {
   filterArticles,
   initArticles,
-} from '../../store/reducers/articles.actions';
+} from '../../store/reducers/articles/articles.actions';
+import { initRangeData } from '../../store/reducers/range/range-data.actions';
+import { ApplicationState } from '../../store/types/app.types';
 import { ArticleDispatchType } from '../../store/types/articles.types';
+import { RangeDataDispatchType } from '../../store/types/range-data.types';
 import { NormalRangeProps } from './normal-range-props.interface';
 
 const StyledSpinnerWrapper = styled.div`
@@ -19,6 +22,7 @@ const StyledSpinnerWrapper = styled.div`
 class NormalRange extends Component<NormalRangeProps> {
   componentDidMount() {
     this.props.onInitArticles();
+    this.props.onInitRangeData();
   }
 
   private filterArticles = (min: number, max: number): void => {
@@ -26,7 +30,7 @@ class NormalRange extends Component<NormalRangeProps> {
   };
 
   render(): JSX.Element {
-    const { articles, error } = this.props;
+    const { articles, error } = this.props.articles;
     let articlesJsx = error ? (
       <p>Articles can't be loaded!</p>
     ) : (
@@ -47,8 +51,8 @@ class NormalRange extends Component<NormalRangeProps> {
     return (
       <div>
         <Range
-          min={0}
-          max={100}
+          min={this.props.rangeData.min || 0}
+          max={this.props.rangeData.max || 100}
           step={5}
           onFilterArticles={this.filterArticles}
           disableInputs={true}
@@ -59,10 +63,18 @@ class NormalRange extends Component<NormalRangeProps> {
   }
 }
 
-const mapStateToProps = (state: any) => {
+const mapStateToProps = (state: ApplicationState) => {
   return {
-    articles: state.articles && state.articles.articles,
-    error: state.articles && state.articles.error,
+    articles: {
+      articles: state.articles && state.articles.articles,
+      error: state.articles && state.articles.error,
+    },
+    rangeData: {
+      min: state.rangeData.min,
+      max: state.rangeData.max,
+      rangeValues: state.rangeData.rangeValues,
+      error: state.rangeData.error,
+    },
   };
 };
 
@@ -71,6 +83,7 @@ const mapDispatchToProps = (dispatch: any) => {
     onInitArticles: (): ArticleDispatchType => dispatch(initArticles()),
     onFilterArticles: (min: number, max: number): ArticleDispatchType =>
       dispatch(filterArticles(min, max)),
+    onInitRangeData: (): RangeDataDispatchType => dispatch(initRangeData()),
   };
 };
 

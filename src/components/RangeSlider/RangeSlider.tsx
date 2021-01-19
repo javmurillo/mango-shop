@@ -4,7 +4,6 @@ import RangeBullet from '../RangeBullet/RangeBullet';
 import styled from 'styled-components';
 import { RangeSliderProps } from './range-slider.props.interface';
 import { RangeSliderState } from './range-slider.state.interface';
-import { parseConfigFileTextToJson } from 'typescript';
 
 const StyledRangeSlider = styled.div`
   position: relative;

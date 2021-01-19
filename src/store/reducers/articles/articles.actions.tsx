@@ -8,7 +8,7 @@ import {
   FETCH_ARTICLES_FAILED,
   FilterArticlesAction,
   FILTER_ARTICLES,
-} from '../types/articles.types';
+} from '../../types/articles.types';
 
 export const setArticles = (articles: Article[]): SetArticlesAction => {
   return {

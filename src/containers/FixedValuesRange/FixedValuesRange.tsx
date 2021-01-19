@@ -7,7 +7,7 @@ import Range from '../../components/Range/Range';
 import {
   filterArticles,
   initArticles,
-} from '../../store/reducers/articles.actions';
+} from '../../store/reducers/articles/articles.actions';
 import { ArticleDispatchType } from '../../store/types/articles.types';
 import { FixedValuesRangeProps } from './fixed-values-range-props.interface';
 

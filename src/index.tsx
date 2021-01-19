@@ -7,12 +7,14 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import { createStore, applyMiddleware, combineReducers } from 'redux';
 import { Provider } from 'react-redux';
 import thunk from 'redux-thunk';
-import articlesReducer from './store/reducers/articles.reducer';
+import articlesReducer from './store/reducers/articles/articles.reducer';
+import rangeDataReducer from './store/reducers/range/range-data.reducer';
 import { ApplicationState } from './store/types/app.types';
 import { composeWithDevTools } from 'redux-devtools-extension';
 
 const rootReducer = combineReducers<ApplicationState>({
   articles: articlesReducer,
+  rangeData: rangeDataReducer,
 });
 
 const store = createStore(
