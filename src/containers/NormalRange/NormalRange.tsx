@@ -46,7 +46,7 @@ class NormalRange extends Component<NormalRangeProps> {
           max={this.props.rangeData.max || 100}
           step={5}
           onFilterArticles={this.filterArticles}
-          disableInputs={true}
+          disableInputs={false}
         />
         {articlesJsx}
       </div>

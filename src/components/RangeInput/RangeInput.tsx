@@ -20,7 +20,7 @@ const StyledEuro = styled.span`
 export default class RangeInput extends Component<RangeInputProps> {
   render(): JSX.Element {
     return (
-      <StyledInputWrapper>
+      <StyledInputWrapper style={{ marginRight: '2rem' }}>
         <StyledInput
           type="number"
           value={this.props.value}

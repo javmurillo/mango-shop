@@ -6,7 +6,7 @@ import { RangeProps } from './range-props.interface';
 import { RangeState } from './range-state.interface';
 
 const StyledMainRange = styled.div`
-  width: 33%;
+  width: 512px;
   text-align: center;
   display: flex;
   flex-direction: row;
@@ -109,15 +109,15 @@ export default class Range extends Component<RangeProps, RangeState> {
           rangeKey="start"
           disabled={this.props.disableInputs}
         ></RangeInput>
-        <StyledWrapperRange>
-          <RangeSlider
-            min={this.state.min}
-            max={this.state.max}
-            step={this.props.step}
-            rangeValue={this.state.rangeValue}
-            onChange={this.onChange}
-          />
-        </StyledWrapperRange>
+
+        <RangeSlider
+          min={this.state.min}
+          max={this.state.max}
+          step={this.props.step}
+          rangeValue={this.state.rangeValue}
+          onChange={this.onChange}
+        />
+
         <RangeInput
           onChange={this.handleChange}
           value={this.state.rangeValue.end}
