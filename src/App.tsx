@@ -1,15 +1,15 @@
 import React from 'react';
 import {
   BrowserRouter as Router,
-  Switch,
-  Route,
   Redirect,
+  Route,
+  Switch,
 } from 'react-router-dom';
 import styled from 'styled-components';
 import './App.css';
-import { MangoNavbar } from './components/Navbar/Navbar';
-import FixedValuesRange from './containers/FixedValuesRange/FixedValuesRange';
-import NormalRange from './containers/NormalRange/NormalRange';
+import { MangoNavbar } from './libs/navbar/components/Navbar/Navbar';
+import FixedValuesRange from './mango-shop/containers/FixedValuesRange/FixedValuesRange';
+import NormalRange from './mango-shop/containers/NormalRange/NormalRange';
 
 const StyledContainer = styled.main`
   width: 75%;

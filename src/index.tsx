@@ -1,16 +1,24 @@
+import 'bootstrap/dist/css/bootstrap.min.css';
 import React from 'react';
 import ReactDOM from 'react-dom';
-import './index.css';
-import App from './App';
-import reportWebVitals from './reportWebVitals';
-import 'bootstrap/dist/css/bootstrap.min.css';
-import { createStore, applyMiddleware, combineReducers } from 'redux';
 import { Provider } from 'react-redux';
-import thunk from 'redux-thunk';
-import articlesReducer from './store/reducers/articles/articles.reducer';
-import rangeDataReducer from './store/reducers/range/range-data.reducer';
-import { ApplicationState } from './store/types/app.types';
+import { applyMiddleware, combineReducers, createStore } from 'redux';
 import { composeWithDevTools } from 'redux-devtools-extension';
+import thunk from 'redux-thunk';
+import App from './App';
+import './index.css';
+import articlesReducer, {
+  ArticlesState,
+} from './libs/articles/store/reducers/articles.reducer';
+import rangeDataReducer, {
+  RangeDataState,
+} from './libs/range/store/reducers/range-data.reducer';
+import reportWebVitals from './reportWebVitals';
+
+export interface ApplicationState {
+  articles: ArticlesState;
+  rangeData: RangeDataState;
+}
 
 const rootReducer = combineReducers<ApplicationState>({
   articles: articlesReducer,
