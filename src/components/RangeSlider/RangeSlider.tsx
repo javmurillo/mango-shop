@@ -133,29 +133,51 @@ export default class RangeSlider extends Component<
     }
   }
 
-  getStartStep(increase: number): number {
-    if (Array.isArray(this.props.step)) {
-      return increase === 1 ? this.startSteps?.right : this.startSteps?.left;
+  getStartStep(
+    increase: number,
+    step: RangeSliderProps['step'],
+    startSteps: {
+      left: number;
+      right: number;
     }
-    return this.props.step;
+  ): number {
+    if (Array.isArray(step)) {
+      return increase === 1 ? startSteps.right : startSteps.left;
+    }
+    return step;
   }
 
-  getEndStep(increase: number): number | undefined {
-    if (Array.isArray(this.props.step)) {
-      return increase === 1 ? this.endSteps?.right : this.endSteps?.left;
+  getEndStep(
+    increase: number,
+    step: RangeSliderProps['step'],
+    endSteps: {
+      left: number;
+      right: number;
     }
-    return this.props.step;
+  ): number {
+    if (Array.isArray(step)) {
+      return increase === 1 ? endSteps.right : endSteps.left;
+    }
+    return step;
   }
 
   startHandleMove = (increase: number): void => {
     const { start } = this.state;
-    const calculatedStep = this.getStartStep(increase);
+    const calculatedStep = this.getStartStep(
+      increase,
+      this.props.step,
+      this.startSteps
+    );
     if (Array.isArray(this.props.step)) {
       this.updateIndexes(increase, this.props.step, 'start');
       this.updateSteps(this.props.step as number[], 'start');
     }
     const nextStart = start + increase * calculatedStep!;
-    const updatedStart = this.getStartValue(nextStart);
+    const updatedStart = this.getStartValue(
+      nextStart,
+      this.props.min,
+      this.state.end
+    );
     if (updatedStart !== start) {
       this.updateState(updatedStart, this.state.end);
       this.onChange(updatedStart, this.state.end);
@@ -164,33 +186,41 @@ export default class RangeSlider extends Component<
 
   endHandleMove = (increase: number): void => {
     const { end } = this.state;
-    const calculatedStep = this.getEndStep(increase);
+    const calculatedStep = this.getEndStep(
+      increase,
+      this.props.step,
+      this.endSteps
+    );
     if (Array.isArray(this.props.step)) {
       this.updateIndexes(increase, this.props.step, 'end');
       this.updateSteps(this.props.step as number[], 'end');
     }
     const nextEnd = end + increase * calculatedStep!;
-    const updatedEnd = this.getEndValue(nextEnd);
+    const updatedEnd = this.getEndValue(
+      nextEnd,
+      this.props.max,
+      this.state.start
+    );
     if (updatedEnd !== end) {
       this.updateState(this.state.start, updatedEnd);
       this.onChange(this.state.start, updatedEnd);
     }
   };
 
-  getStartValue(nextStart: number): number {
-    if (nextStart < this.props.min) {
-      return this.props.min;
-    } else if (nextStart > this.state.end) {
-      return this.state.end;
+  getStartValue(nextStart: number, min: number, end: number): number {
+    if (nextStart < min) {
+      return min;
+    } else if (nextStart > end) {
+      return end;
     }
     return nextStart;
   }
 
-  getEndValue(nextEnd: number): number {
-    if (nextEnd > this.props.max) {
-      return this.props.max;
-    } else if (nextEnd < this.state.start) {
-      return this.state.start;
+  getEndValue(nextEnd: number, max: number, start: number): number {
+    if (nextEnd > max) {
+      return max;
+    } else if (nextEnd < start) {
+      return start;
     }
     return nextEnd;
   }
