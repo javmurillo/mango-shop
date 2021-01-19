@@ -18,35 +18,38 @@ const StyledOldPrice = styled.span`
   text-decoration: line-through;
 `;
 
+const StyledCard = styled(Card)`
+  width: 16rem;
+  margin: 2rem;
+`;
+
+const StyledCardFooter = styled(Card.Footer)`
+  padding: 2px;
+  background: transparent;
+  text-align: center;
+  border: none;
+`;
+
 export const Article = (props: { article: ArticleTypes.Article }) => {
   const { article } = props;
   return (
-    <Card style={{ width: '16rem', margin: '2rem' }}>
+    <StyledCard>
       <Card.Img variant="top" src={article.img} />
       <Card.Body>
         <Card.Title>{article.name}</Card.Title>
         <Card.Text>{article.description}</Card.Text>
       </Card.Body>
-      <Card.Footer
-        className="text-muted"
-        style={{
-          padding: '2px',
-          background: 'transparent',
-          textAlign: 'center',
-          border: 'none',
-        }}
-      >
+      <StyledCardFooter>
         {article.oldPrice ? <Badge variant="success">¡Oferta!</Badge> : null}
-      </Card.Footer>
+      </StyledCardFooter>
       <Card.Footer className="text-muted">
         <StyledPriceWrapper>
           {article.oldPrice ? (
             <StyledOldPrice>{article.oldPrice} €</StyledOldPrice>
           ) : null}
-
           <StyledCurrentPrice>{article.currentPrice} €</StyledCurrentPrice>
         </StyledPriceWrapper>
       </Card.Footer>
-    </Card>
+    </StyledCard>
   );
 };
