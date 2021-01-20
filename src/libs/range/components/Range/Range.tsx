@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import styled from 'styled-components';
-import { RangeInput } from '../RangeInput/RangeInput';
+import RangeInput from '../RangeInput/RangeInput';
 import RangeSlider from '../RangeSlider/RangeSlider';
 import { RangeProps } from './range-props.interface';
 import { RangeState } from './range-state.interface';
