@@ -1,6 +1,48 @@
-# Getting Started with Create React App
+# Mango Shop App[![Build Status](https://travis-ci.org/javmurillo/mango-shop.svg?branch=master)](https://travis-ci.org/javmurillo/mango-shop)
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+Mango Shop App is a _Single-Page Application_ built with ReactJS + Redux with mocked HTTP calls via [mockable.io](https://www.mockable.io/a/). Users can use a dual price range slider in order to filter the articles shown in the gallery as a demo of the dispatched event.
+
+![](https://i.imgur.com/Y1wNaQ7.gif)
+
+## Getting Started
+
+These instructions will get you a copy of the project up and running on your local machine for development and testing purposes.
+
+### Prerequisites
+
+Please, make sure the following components are installed on your computer before installing:
+
+- **[npm](https://www.npmjs.com/)**. Package manager for JavaScript.
+
+### Installing
+
+Step by step instructions in order to run the application locally:
+
+1.  Clone or download the repository into your computer.
+
+```
+git clone https://github.com/javmurillo/mango-shop.git
+```
+
+2.  Navigate to the created directory.
+
+```
+cd mango-shop
+```
+
+3.  Install all dependencies.
+
+```
+npm install
+```
+
+4.  Start the application.
+
+```
+npm start
+```
+
+5.  The application is now running at [http://localhost:8080](http://localhost:8080/).
 
 ## Available Scripts
 
@@ -9,7 +51,7 @@ In the project directory, you can run:
 ### `npm start`
 
 Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+Open [http://localhost:8080](http://localhost:3000) to view it in the browser.
 
 The page will reload if you make edits.\
 You will also see any lint errors in the console.
@@ -17,7 +59,6 @@ You will also see any lint errors in the console.
 ### `npm test`
 
 Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
 
 ### `npm run build`
 
@@ -39,8 +80,41 @@ Instead, it will copy all the configuration files and the transitive dependencie
 
 You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
 
-## Learn More
+## Deployment
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+The apllication is live at https://javmurillo.github.io/mango-shop/ hosted by [GitHub Pages](https://pages.github.com/).
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+## Built With
+
+- [ReactJS](https://reactjs.org/) - JavaScript library for building user interfaces.
+- [Redux](https://redux.js.org/) - Open-source JavaScript library for managing application state
+- [TravisCI](https://travis-ci.org/) - Hosted, distributed continuous integration service used to build and test software projects hosted at GitHub
+- [create-react-app](https://github.com/facebook/create-react-app) - Create React apps with no build configuration.
+- [React Bootstrap](https://react-bootstrap.github.io/) - Free and open-source front-end framework for designing websites and web applications.
+
+## Components & Rationale
+
+### Article
+
+Card which displays the information about a given article.
+
+##### Properties
+
+- `id: string`. Article identificator. Will be used as a key property. By assigning unique keys to each Article we achieve two things: the key is not identical between sibling components. and the key do not change between renders.
+- `name: string`. Article's name.
+- `description: string`. Article's description.
+- `img: string`. Image
+  related to the article.
+- `currentPrice: number`. Article's current
+  price.
+- `oldPrice: number`. Article's old price. Will be used to represent if an article is on offer.
+
+### ArticlesList
+
+## Authors
+
+- **Javier Murillo** - *jmurillo93@gmail.com* - [GitHub](https://github.com/javmurillo)
+
+## License
+
+This project is licensed under the [MIT](https://opensource.org/licenses/MIT) License.
