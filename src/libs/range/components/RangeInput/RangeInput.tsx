@@ -35,7 +35,7 @@ export const RangeInput = (props: RangeInputProps) => {
         style={props.disabled ? { cursor: 'not-allowed' } : {}}
         disabled={props.disabled}
       />
-      <StyledEuro>€</StyledEuro>
+      <StyledEuro style={{ marginRight: '1rem' }}>€</StyledEuro>
     </StyledInputWrapper>
   );
 };
