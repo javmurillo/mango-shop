@@ -30,7 +30,7 @@ export const RangeInput = (props: RangeInputProps) => {
         type="number"
         value={props.value}
         onChange={ev => {
-          props.onChange(ev, props.rangeKey);
+          props.onChange && props.onChange(ev, props.rangeKey);
         }}
         style={props.disabled ? { cursor: 'not-allowed' } : {}}
         disabled={props.disabled}

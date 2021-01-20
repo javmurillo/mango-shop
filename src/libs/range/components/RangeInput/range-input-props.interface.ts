@@ -1,9 +1,9 @@
 export interface RangeInputProps {
   value?: number;
-  onChange: (
+  onChange?: (
     event: React.ChangeEvent<HTMLInputElement>,
     key: 'start' | 'end'
   ) => void;
   rangeKey: 'start' | 'end';
-  disabled: boolean;
+  disabled?: boolean;
 }
