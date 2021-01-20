@@ -20,7 +20,7 @@ export const ArticlesList = (props: ArticlesListProps): JSX.Element => {
   if (props.articlesList.length === 0) {
     return (
       <StyledAlert variant="dark">
-        There is no articles to show matching the given filters!
+        There are no articles to show matching the given filters!
       </StyledAlert>
     );
   }
