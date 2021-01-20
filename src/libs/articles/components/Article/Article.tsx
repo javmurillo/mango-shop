@@ -44,7 +44,7 @@ export const Article = (props: { article: ArticleDto }): JSX.Element => {
         <Card.Text>{article.description}</Card.Text>
       </Card.Body>
       <StyledCardFooter>
-        {article.oldPrice ? <Badge variant="success">¡Oferta!</Badge> : null}
+        {article.oldPrice ? <Badge variant="success">On Offer!</Badge> : null}
       </StyledCardFooter>
       <Card.Footer className="text-muted">
         <StyledPriceWrapper>
