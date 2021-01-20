@@ -1,25 +1,29 @@
-import { Component } from 'react';
+import { Component, CSSProperties } from 'react';
 import { RangeBulletProps } from './range-bullet-props.interface';
 import { RangeBulletState } from './range-bullet-state.interface';
 import { bulletStyles } from './styles';
-import { CSSProperties } from 'react';
 
+/**
+ * RangeBullet class
+ */
 export default class RangeBullet extends Component<
   RangeBulletProps,
   RangeBulletState
 > {
+  // RangeBullet state
   public state: RangeBulletState = {
     hovered: false,
     focused: false,
     active: false,
   };
 
-  private style: CSSProperties;
-  private lastPos: number | undefined;
-  private currentPos: number | undefined;
+  private style: CSSProperties; // CSS Style for this component.
+  private lastPos: number | undefined; // Last bullet position.
+  private currentPos: number | undefined; // Current bullet position.
 
   constructor(props: RangeBulletProps) {
     super(props);
+    // Style initialization
     this.style = {
       ...bulletStyles.handle,
       left: this.props.offset,
@@ -31,10 +35,17 @@ export default class RangeBullet extends Component<
     document.addEventListener('mouseup', this.onBulletMouseUp);
   }
 
+  /**
+   * Each time the props are update, style is recalculated.
+   * @param props RangeBulletProps
+   */
   componentWillReceiveProps(props: RangeBulletProps): void {
     this.style = this.getBulletStyle(this.state, props);
   }
 
+  /**
+   * @event onMouseEnter Hover style activated.
+   */
   onMouseEnterBullet = (): void => {
     this.style = this.getBulletStyle(
       { ...this.state, hovered: true },
@@ -45,6 +56,9 @@ export default class RangeBullet extends Component<
     });
   };
 
+  /**
+   * @event onMouseLeave Hover style deactivated.
+   */
   onMouseLeaveBullet = (): void => {
     this.style = this.getBulletStyle(
       { ...this.state, hovered: false },
@@ -55,20 +69,30 @@ export default class RangeBullet extends Component<
     });
   };
 
+  /**
+   * Sets the bullet ready to start moving.
+   * @event onMouseDown Hover style deactivated.
+   */
   onMouseDownBullet = (
     event: React.MouseEvent<HTMLDivElement, MouseEvent>
   ): void => {
     this.setBulletToStartMoving(event, event.pageX);
   };
 
+  /**
+   * Moves the bullet if active.
+   * @event mousemove
+   * @param event MouseEvent
+   */
   onBulletMouseMove = (event: MouseEvent): void => {
     if (this.state.active) {
       this.move(event, event.clientX);
     }
   };
 
-  /*
-   *  If the range bullet is active, just stop it where the event mouse up was fired.
+  /**
+   * If the range bullet is active, just stop it where the event mouse up was fired.
+   * @param event MouseEvent
    */
   onBulletMouseUp = (event: MouseEvent): void => {
     if (this.state.active) {
@@ -77,6 +101,11 @@ export default class RangeBullet extends Component<
     }
   };
 
+  /**
+   * Updates the state setting [active] to true, and setting the [currentPos] and [lastPos] global properties.
+   * @param event MouseEvent | React.MouseEvent<HTMLDivElement, MouseEvent>
+   * @param position number
+   */
   setBulletToStartMoving = (
     event: MouseEvent | React.MouseEvent<HTMLDivElement, MouseEvent>,
     position: number
@@ -94,6 +123,11 @@ export default class RangeBullet extends Component<
     });
   };
 
+  /**
+   * Moves the bullet.
+   * @param event MouseEvent
+   * @param position Current bullet position
+   */
   move = (event: MouseEvent, position: number): void => {
     event.preventDefault();
     event.stopPropagation();
@@ -109,6 +143,9 @@ export default class RangeBullet extends Component<
     this.lastPos = position;
   };
 
+  /**
+   * Updates the state setting [active] to false, finishing the movement.
+   */
   moveEnd = (): void => {
     this.style = this.getBulletStyle(
       { ...this.state, active: false },
@@ -119,7 +156,12 @@ export default class RangeBullet extends Component<
     });
   };
 
-  getBulletStyle(state: RangeBulletState, props: RangeBulletProps) {
+  /**
+   * Returns the new style given the current state and properties.
+   * @param state RangeBulletState
+   * @param props RangeBulletProps
+   */
+  getBulletStyle(state: RangeBulletState, props: RangeBulletProps): Object {
     const { hovered, focused, active } = state;
     const { offset } = props;
     const calcHoverStyle = hovered ? bulletStyles.hoveredHandle : undefined;

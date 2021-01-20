@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import styled from 'styled-components';
-import RangeInput from '../RangeInput/RangeInput';
+import { RangeInput } from '../RangeInput/RangeInput';
 import RangeSlider from '../RangeSlider/RangeSlider';
 import { RangeProps } from './range-props.interface';
 import { RangeState } from './range-state.interface';
@@ -14,8 +14,11 @@ const StyledMainRange = styled.div`
   margin-top: 16px;
 `;
 
+/**
+ * Range class
+ */
 export default class Range extends Component<RangeProps, RangeState> {
-  public state: RangeState;
+  public state: RangeState; // Range state
 
   constructor(props: RangeProps) {
     super(props);
@@ -24,6 +27,7 @@ export default class Range extends Component<RangeProps, RangeState> {
       min = step[0];
       max = step[step.length - 1];
     }
+    // Initializing state
     this.state = {
       min,
       max,
@@ -34,11 +38,20 @@ export default class Range extends Component<RangeProps, RangeState> {
     };
   }
 
+  /**
+   * Updates the state and calls the [onChange] function.
+   * @param rangeValue Rage of the current values
+   */
   private onChange = (rangeValue: { start: number; end: number }): void => {
     this.setState({ rangeValue });
-    this.props.onFilterArticles(rangeValue.start, rangeValue.end);
+    this.props.onChange(rangeValue.start, rangeValue.end);
   };
 
+  /**
+   * Updates the state given the value from the input and the [key] value: starting or ending input.
+   * @param event React.ChangeEvent<HTMLInputElement>
+   * @param key Starting or Ending input.
+   */
   private handleInputChange = (
     event: React.ChangeEvent<HTMLInputElement>,
     key: 'start' | 'end'
@@ -61,6 +74,11 @@ export default class Range extends Component<RangeProps, RangeState> {
     }
   };
 
+  /**
+   * Updates the state and calls the [onChange] function once finished.
+   * @param event React.ChangeEvent<HTMLInputElement>
+   * @param key Starting or Ending input.
+   */
   private patchState = (key: 'start' | 'end', value: number): void => {
     this.setState(
       previousState => ({
@@ -71,7 +89,7 @@ export default class Range extends Component<RangeProps, RangeState> {
         },
       }),
       () => {
-        this.props.onFilterArticles(
+        this.props.onChange(
           this.state.rangeValue.start,
           this.state.rangeValue.end
         );

@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React from 'react';
 import styled from 'styled-components';
 import { RangeInputProps } from './range-input-props.interface';
 
@@ -17,21 +17,25 @@ const StyledInputWrapper = styled.div`
 const StyledEuro = styled.span`
   font-weight: bold;
 `;
-export default class RangeInput extends Component<RangeInputProps> {
-  render(): JSX.Element {
-    return (
-      <StyledInputWrapper>
-        <StyledInput
-          type="number"
-          value={this.props.value}
-          onChange={ev => {
-            this.props.onChange(ev, this.props.rangeKey);
-          }}
-          style={this.props.disabled ? { cursor: 'not-allowed' } : {}}
-          disabled={this.props.disabled}
-        />
-        <StyledEuro>€</StyledEuro>
-      </StyledInputWrapper>
-    );
-  }
-}
+
+/**
+ * RangeIpunt component. Cursor will show as not allowed if the input is disabled.
+ * Each change will update its parent state.
+ * @param props RangeInputProps
+ */
+export const RangeInput = (props: RangeInputProps) => {
+  return (
+    <StyledInputWrapper>
+      <StyledInput
+        type="number"
+        value={props.value}
+        onChange={ev => {
+          props.onChange(ev, props.rangeKey);
+        }}
+        style={props.disabled ? { cursor: 'not-allowed' } : {}}
+        disabled={props.disabled}
+      />
+      <StyledEuro>€</StyledEuro>
+    </StyledInputWrapper>
+  );
+};

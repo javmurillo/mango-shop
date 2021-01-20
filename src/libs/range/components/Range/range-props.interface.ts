@@ -1,5 +1,5 @@
 export interface RangeProps {
-  onFilterArticles: (min: number, max: number) => void;
+  onChange: (min: number, max: number) => void;
   min: number;
   max: number;
   step: number | number[];

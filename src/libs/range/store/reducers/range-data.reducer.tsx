@@ -12,10 +12,18 @@ export interface RangeDataState {
   error: boolean;
 }
 
+/**
+ * State initialization
+ */
 const initialState: RangeDataState = {
   error: false,
 };
 
+/**
+ * @returns Updated state given an action.
+ * @param state Current range data state.
+ * @param action SetRangeDataAction.
+ */
 const setRangeData = (
   state: RangeDataState,
   action: SetRangeDataAction
@@ -29,6 +37,10 @@ const setRangeData = (
   };
 };
 
+/**
+ * @returns Sets error to true.
+ * @param state Current range data state.
+ */
 const fetchRangeDataFailed = (state: RangeDataState): RangeDataState => {
   return {
     ...state,
@@ -36,7 +48,12 @@ const fetchRangeDataFailed = (state: RangeDataState): RangeDataState => {
   };
 };
 
-const rangeDataReducer = (
+/**
+ * Range data reducer which handles dispatched actions.
+ * @param state Current range data state.
+ * @param action RangeDataAction.
+ */
+export const rangeDataReducer = (
   state = initialState,
   action: RangeDataAction
 ): RangeDataState => {
@@ -49,5 +66,3 @@ const rangeDataReducer = (
       return state;
   }
 };
-
-export default rangeDataReducer;

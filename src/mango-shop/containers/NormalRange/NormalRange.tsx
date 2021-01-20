@@ -19,6 +19,11 @@ class NormalRange extends Component<NormalRangeProps> {
     this.props.onInitRangeData();
   }
 
+  /**
+   * Filters the articles given a minimun and maximun value.
+   * @param min Minimum value to filter the articles.
+   * @param max Maximum value to filter the articles
+   */
   private filterArticles = (min: number, max: number): void => {
     this.props.onFilterArticles(min, max);
   };
@@ -38,7 +43,7 @@ class NormalRange extends Component<NormalRangeProps> {
           min={this.props.rangeData.min || 0}
           max={this.props.rangeData.max || 100}
           step={5}
-          onFilterArticles={this.filterArticles}
+          onChange={this.filterArticles}
           disableInputs={false}
         />
         {articlesJsx}

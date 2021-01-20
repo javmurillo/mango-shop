@@ -10,6 +10,10 @@ import {
   SET_ARTICLES,
 } from '../../models/articles.types';
 
+/**
+ * @returns SetArticlesAction
+ * @param articles Array of articles
+ */
 export const setArticles = (articles: Article[]): SetArticlesAction => {
   return {
     type: SET_ARTICLES,
@@ -17,12 +21,20 @@ export const setArticles = (articles: Article[]): SetArticlesAction => {
   };
 };
 
+/**
+ * @returns FetchArticlesFailedAction
+ */
 export const fetchArticlesFailed = (): FetchArticlesFailedAction => {
   return {
     type: FETCH_ARTICLES_FAILED,
   };
 };
 
+/**
+ * @returns FilterArticlesAction.
+ * @param min Minimum value to filter.
+ * @param max Maximun value to filter.
+ */
 export const filterArticles = (
   min: number,
   max: number
@@ -36,6 +48,9 @@ export const filterArticles = (
   };
 };
 
+/**
+ * HTTP call to retrieve the articles.
+ */
 export const initArticles = () => {
   return (dispatch: ArticleDispatchType) => {
     axios

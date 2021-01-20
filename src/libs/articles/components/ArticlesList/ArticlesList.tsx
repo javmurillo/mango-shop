@@ -7,6 +7,10 @@ const StyledDiv = styled.div`
   justify-content: center;
 `;
 
+/**
+ * ArticlesList component which iterates over the props to show one card per article.
+ * @param props ArticlesListProps
+ */
 export const ArticlesList = (props: ArticlesListProps): JSX.Element => {
   return (
     <StyledDiv className="row">

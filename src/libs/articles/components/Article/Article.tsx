@@ -30,6 +30,10 @@ const StyledCardFooter = styled(Card.Footer)`
   border: none;
 `;
 
+/**
+ * Article component which displays the article information.
+ * @param props ArticleDto
+ */
 export const Article = (props: { article: ArticleDto }): JSX.Element => {
   const { article } = props;
   return (

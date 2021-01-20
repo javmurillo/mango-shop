@@ -16,7 +16,10 @@ const StyledContainer = styled.main`
   margin: 1rem auto;
 `;
 
-function App() {
+/**
+ * Main app
+ */
+const App = (): JSX.Element => {
   return (
     <div>
       <Router>
@@ -29,12 +32,13 @@ function App() {
             <Route path="/exercise2">
               <FixedValuesRange />
             </Route>
+            {/* Root route redirects to exercise 1 */}
             <Redirect exact from="/" to="/exercise1" />
           </Switch>
         </StyledContainer>
       </Router>
     </div>
   );
-}
+};
 
 export default App;

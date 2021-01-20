@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React from 'react';
 import styled from 'styled-components';
 import { RangeTrackProps } from './range-track-props.interface';
 
@@ -11,9 +11,10 @@ const StyleTrack = styled.div`
   border: 3px solid black;
 `;
 
-export default class RangeTrack extends Component<RangeTrackProps> {
-  render(): JSX.Element {
-    const { trackRef } = this.props;
-    return <StyleTrack ref={trackRef} />;
-  }
-}
+/**
+ * RangeTrack component
+ * @param props RangeTrackProps
+ */
+export const RangeTrack = (props: RangeTrackProps) => {
+  return <StyleTrack ref={props.trackRef} />;
+};

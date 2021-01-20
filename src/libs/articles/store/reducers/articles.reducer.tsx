@@ -14,10 +14,18 @@ export interface ArticlesState {
   error: boolean;
 }
 
+/**
+ * State initialization
+ */
 const initialState: ArticlesState = {
   error: false,
 };
 
+/**
+ * @returns Updated state given an action.
+ * @param state Current articles state.
+ * @param action SetArticlesAction.
+ */
 const setArticles = (
   state: ArticlesState,
   action: SetArticlesAction
@@ -30,6 +38,11 @@ const setArticles = (
   };
 };
 
+/**
+ * Sets the error property to true.
+ * @returns Updated state.
+ * @param state Current articles state.
+ */
 const fetchArticlesFailed = (state: ArticlesState): ArticlesState => {
   return {
     ...state,
@@ -37,6 +50,12 @@ const fetchArticlesFailed = (state: ArticlesState): ArticlesState => {
   };
 };
 
+/**
+ * Filters the articles
+ * @returns Updated state.
+ * @param state Current articles state.
+ * @param action FilterArticlesAction
+ */
 const filterArticles = (
   state: ArticlesState,
   action: FilterArticlesAction
@@ -53,7 +72,12 @@ const filterArticles = (
   };
 };
 
-const articlesReducer = (
+/**
+ * Articles reducer which handles dispatched actions.
+ * @param state Current articles state.
+ * @param action ArticlesAction.
+ */
+export const articlesReducer = (
   state = initialState,
   action: ArticleAction
 ): ArticlesState => {
@@ -68,5 +92,3 @@ const articlesReducer = (
       return state;
   }
 };
-
-export default articlesReducer;

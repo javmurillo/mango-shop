@@ -8,6 +8,9 @@ const StyledLogo = styled.img`
   height: 25px;
 `;
 
+/**
+ * Navbar component
+ */
 export const MangoNavbar = (): JSX.Element => {
   return (
     <Navbar bg="light" expand="lg">

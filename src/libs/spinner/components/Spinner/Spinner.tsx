@@ -11,6 +11,10 @@ const StyledSpinner = styled(Spinner)`
   text-align: center;
 `;
 
+/**
+ * Custom spinner which shows an error message in case of [error] equals true. Icon spinning otherwise.
+ * @param props CustomSpinnerProps
+ */
 export const CustomSpinner = (props: CustomSpinnerProps): JSX.Element => {
   return props.error ? (
     <p>{props.message}</p>

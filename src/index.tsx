@@ -7,10 +7,12 @@ import { composeWithDevTools } from 'redux-devtools-extension';
 import thunk from 'redux-thunk';
 import App from './App';
 import './index.css';
-import articlesReducer, {
+import {
+  articlesReducer,
   ArticlesState,
 } from './libs/articles/store/reducers/articles.reducer';
-import rangeDataReducer, {
+import {
+  rangeDataReducer,
   RangeDataState,
 } from './libs/range/store/reducers/range-data.reducer';
 import reportWebVitals from './reportWebVitals';
@@ -20,11 +22,17 @@ export interface ApplicationState {
   rangeData: RangeDataState;
 }
 
+/**
+ * Root reducer initialization.
+ */
 const rootReducer = combineReducers<ApplicationState>({
   articles: articlesReducer,
   rangeData: rangeDataReducer,
 });
 
+/**
+ * Store initialization enabling redux dev tools..
+ */
 const store = createStore(
   rootReducer,
   composeWithDevTools(applyMiddleware(thunk))

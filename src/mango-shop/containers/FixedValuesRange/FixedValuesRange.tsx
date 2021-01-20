@@ -18,6 +18,11 @@ class FixedValuesRange extends Component<FixedValuesRangeProps> {
     this.props.onInitArticles();
   }
 
+  /**
+   * Filters the articles given a minimun and maximun value.
+   * @param min Minimum value to filter the articles.
+   * @param max Maximum value to filter the articles
+   */
   private filterArticles = (min: number, max: number): void => {
     this.props.onFilterArticles(min, max);
   };
@@ -37,7 +42,7 @@ class FixedValuesRange extends Component<FixedValuesRangeProps> {
           min={0}
           max={100}
           step={[9.99, 29.99, 39.99, 59.99, 79.99, 99.99]}
-          onFilterArticles={this.filterArticles}
+          onChange={this.filterArticles}
           disableInputs={true}
         />
         {articlesJsx}
