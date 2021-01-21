@@ -24,11 +24,20 @@ export default class Range extends Component<RangeProps, RangeState> {
     super(props);
     let { min, max, step } = props;
     if (Array.isArray(step)) {
-      min = step[0];
-      max = step[step.length - 1];
+      step.sort((a, b) => a - b);
+      if (step.length > 0) {
+        min = step[0];
+        max = step[step.length - 1];
+      } else {
+        step = 1;
+      }
+    } else {
+      max = Math.max(props.min, props.max);
+      min = Math.min(props.min, props.max);
     }
     // Initializing state
     this.state = {
+      step,
       min,
       max,
       rangeValue: {
@@ -36,6 +45,7 @@ export default class Range extends Component<RangeProps, RangeState> {
         end: max,
       },
     };
+    console.log(this.state);
   }
 
   /**
@@ -107,13 +117,15 @@ export default class Range extends Component<RangeProps, RangeState> {
         <RangeInput
           onChange={this.handleInputChange}
           value={this.state.rangeValue.start}
+          min={this.state.rangeValue.start}
+          max={this.state.rangeValue.end}
           rangeKey="start"
           disabled={this.props.disableInputs}
         ></RangeInput>
         <RangeSlider
           min={this.state.min}
           max={this.state.max}
-          step={this.props.step}
+          step={this.state.step}
           rangeValue={this.state.rangeValue}
           onChange={this.onChange}
           ariaLabel="range-slider"
@@ -121,6 +133,8 @@ export default class Range extends Component<RangeProps, RangeState> {
         <RangeInput
           onChange={this.handleInputChange}
           value={this.state.rangeValue.end}
+          min={this.state.rangeValue.start}
+          max={this.state.rangeValue.end}
           rangeKey="end"
           disabled={this.props.disableInputs}
         ></RangeInput>

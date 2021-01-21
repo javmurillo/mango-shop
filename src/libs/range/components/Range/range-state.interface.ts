@@ -5,4 +5,5 @@ export interface RangeState {
   };
   min: number;
   max: number;
+  step: number | number[];
 }

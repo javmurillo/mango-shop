@@ -41,6 +41,8 @@ export default class RangeSlider extends Component<
     this.state = {
       start,
       end,
+      startIndexZ: 1,
+      endIndexZ: 1,
     };
     let startLeftStep = step;
     let startRightStep = step;
@@ -243,8 +245,15 @@ export default class RangeSlider extends Component<
       this.props.min,
       this.state.end
     );
+    const newStartIndexZ = 1;
+    const newEndIndexZ = 0;
     if (updatedStart !== start) {
-      this.updateState(updatedStart, this.state.end);
+      this.updateState(
+        updatedStart,
+        this.state.end,
+        newStartIndexZ,
+        newEndIndexZ
+      );
       this.onChange(updatedStart, this.state.end);
     }
   };
@@ -281,8 +290,15 @@ export default class RangeSlider extends Component<
       this.state.start,
       this.props.max
     );
+    const newStartIndexZ = 0;
+    const newEndIndexZ = 1;
     if (updatedEnd !== end) {
-      this.updateState(this.state.start, updatedEnd);
+      this.updateState(
+        this.state.start,
+        updatedEnd,
+        newStartIndexZ,
+        newEndIndexZ
+      );
       this.onChange(this.state.start, updatedEnd);
     }
   };
@@ -322,10 +338,17 @@ export default class RangeSlider extends Component<
    * @param start Current start value.
    * @param end Current end value.
    */
-  updateState = (start: number, end: number): void => {
+  updateState = (
+    start: number,
+    end: number,
+    startIndexZ: number,
+    endIndexZ: number
+  ): void => {
     this.setState({
       start,
       end,
+      startIndexZ,
+      endIndexZ,
     });
   };
 
@@ -349,7 +372,14 @@ export default class RangeSlider extends Component<
     let startValue = 0;
     let endValue = 0;
     let percentageFactor = 1;
-    const { handleSize, trackLength, start, end } = this.state;
+    const {
+      handleSize,
+      trackLength,
+      start,
+      end,
+      startIndexZ,
+      endIndexZ,
+    } = this.state;
     const { min, max, ariaLabel } = this.props;
     if (trackLength && handleSize) {
       // We get the track width
@@ -370,6 +400,7 @@ export default class RangeSlider extends Component<
           handleMove={this.startHandleMove}
           factor={this.factor}
           step={this.startSteps}
+          zIndex={startIndexZ}
         />
         <RangeBullet
           offset={`${endValue * percentageFactor}%`}
@@ -377,6 +408,7 @@ export default class RangeSlider extends Component<
           handleMove={this.endHandleMove}
           factor={this.factor}
           step={this.endSteps}
+          zIndex={endIndexZ}
         />
       </StyledRangeSlider>
     );

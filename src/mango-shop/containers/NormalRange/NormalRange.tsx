@@ -6,12 +6,12 @@ import {
   filterArticles,
   initArticles,
 } from '../../../libs/articles/store/actions/articles.actions';
+import Range from '../../../libs/range/components/Range/Range';
 import { RangeDataDispatchType } from '../../../libs/range/models/range-data.types';
 import { initRangeData } from '../../../libs/range/store/actions/range-data.actions';
 import { CustomSpinner } from '../../../libs/spinner/components/Spinner/Spinner';
-import { NormalRangeProps } from './normal-range-props.interface';
-import Range from '../../../libs/range/components/Range/Range';
 import { ApplicationState } from '../../../store/app.store';
+import { NormalRangeProps } from './normal-range-props.interface';
 
 class NormalRange extends Component<NormalRangeProps> {
   componentDidMount() {
@@ -29,23 +29,39 @@ class NormalRange extends Component<NormalRangeProps> {
   };
 
   render(): JSX.Element {
-    const { articles, error } = this.props.articles;
-    let articlesJsx = (
-      <CustomSpinner error={error} message="Articles can't be loaded!" />
-    );
+    const { articles } = this.props.articles;
+    const { min, max } = this.props.rangeData;
 
+    let articlesJsx = (
+      <CustomSpinner
+        error={this.props.articles.error}
+        message="Articles can't be loaded!"
+      />
+    );
+    let rangeJsx = (
+      <CustomSpinner
+        error={this.props.rangeData.error}
+        message="Range data can't be loaded!"
+      />
+    );
     if (articles) {
       articlesJsx = <ArticlesList articlesList={articles} />;
     }
-    return (
-      <div>
+    // We compare directly with undefined since  min or max can be 0
+    if (min !== undefined && max !== undefined) {
+      rangeJsx = (
         <Range
-          min={this.props.rangeData.min || 0}
-          max={this.props.rangeData.max || 100}
+          min={min}
+          max={max}
           step={5}
           onChange={this.filterArticles}
           disableInputs={false}
         />
+      );
+    }
+    return (
+      <div>
+        {rangeJsx}
         {articlesJsx}
       </div>
     );

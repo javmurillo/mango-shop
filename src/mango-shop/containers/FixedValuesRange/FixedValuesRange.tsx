@@ -16,6 +16,7 @@ import { ApplicationState } from '../../../store/app.store';
 class FixedValuesRange extends Component<FixedValuesRangeProps> {
   componentDidMount() {
     this.props.onInitArticles();
+    this.props.onInitRangeData();
   }
 
   /**
@@ -29,22 +30,35 @@ class FixedValuesRange extends Component<FixedValuesRangeProps> {
 
   render(): JSX.Element {
     const { articles, error } = this.props.articles;
+    const { min, max, rangeValues } = this.props.rangeData;
+
     let articlesJsx = (
       <CustomSpinner error={error} message="Articles can't be loaded!" />
+    );
+    let rangeJsx = (
+      <CustomSpinner
+        error={this.props.rangeData.error}
+        message="Range data can't be loaded!"
+      />
     );
 
     if (articles) {
       articlesJsx = <ArticlesList articlesList={articles} />;
     }
-    return (
-      <div>
+    if (min !== undefined && max !== undefined && rangeValues) {
+      rangeJsx = (
         <Range
-          min={0}
-          max={100}
-          step={[9.99, 29.99, 39.99, 59.99, 79.99, 99.99]}
+          min={min}
+          max={max}
+          step={rangeValues}
           onChange={this.filterArticles}
           disableInputs={true}
         />
+      );
+    }
+    return (
+      <div>
+        {rangeJsx}
         {articlesJsx}
       </div>
     );

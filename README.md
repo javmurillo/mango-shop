@@ -1,7 +1,7 @@
 
 # Mango Shop App [![Build Status](https://travis-ci.com/javmurillo/mango-shop.svg?branch=master)](https://travis-ci.com/javmurillo/mango-shop)
 
-Mango Shop App is a _Single-Page Application_ built with React v17 + Redux with mocked HTTP calls via [mockable.io](https://www.mockable.io/a/). Users can use a dual price range slider in order to filter the articles shown in the gallery as a demo of the dispatched event.
+Mango Shop App is a _Single-Page Application_ built with React v17 (with TypeScript) + Redux with mocked HTTP calls via [mockable.io](https://www.mockable.io/a/). Users can use a dual price range slider in order to filter the articles shown in the gallery as a demo of the dispatched event.
 
 The aplication is live at https://javmurillo.github.io/mango-shop/ hosted by [GitHub Pages](https://pages.github.com/).
 
@@ -61,18 +61,22 @@ Main component of the slider. It wraps all the other components, passing them th
 - `max: number`. Maximun possible value.
 - `step: number | number[]`. Step or steps. If an array of steps is provided, the min/max passed will be ignored.
 - `disableInputs: boolean`. If inputs should be disable.
+- `ariaLabel: string`. Current element tag.
 
 ###### State
 
 - `rangeValue: { start: number, end: number }`. Current value.
 - `min: number`. Minimum possible value.
 - `max: number`. Maximun possible value.
+- `step: number | number[]`. Step or steps. If an array of steps is provided, the min/max passed will be ignored.
 
 ### RangeSlider
 
 Component which wraps the track and the bullets. It implements the necessary logic to render the RangeBullets where they must be, depending of the `startValue` and the calculated `percentageFactor`. It also saves a reference to the track via a `ref` in order to set the `trackLength` dynamically in its state.
 
 If a `step` array is provided, this component is able to calculate the steps every `RangeBullet`must perform (left and right), storing the the corresponding indexes which representes where every bullet is in the step array. Also, this component handles if a bullet will surpass the other one, avoiding the min value to be greather than the max.
+
+Thanks to the `startIndexZ` and `endIndexZ` we can prevent the bullets from being stuck if they share the minimum/maximun value. The user could always drag the last bullet he moved.
 
 ###### Properties
 
@@ -81,6 +85,7 @@ If a `step` array is provided, this component is able to calculate the steps eve
 - `step: number | number[]`. Step or steps. If an array of steps is provided, the min/max passed will be ignored.
 - `rangeValue: { start: number, end: number }`. Current value.
 - `onChange: (rangeValue: { start: number; end: number }) => void`. Function to trigger on every change.
+- `ariaLabel: string`. Current element tag.
 
 ###### State
 
@@ -88,6 +93,8 @@ If a `step` array is provided, this component is able to calculate the steps eve
 - `end: number`. Current end value.
 - `handleSize: number`. Bullet size, in pixels.
 - `trackLength: number`. Length of the track, in pixels.
+- `startIndexZ: number`. Z index of the starting bullet.
+- `endIndexZ: number`. Z index of the ending bullet.
 
 ### RangeTrack
 
@@ -96,6 +103,7 @@ Stateless component which renders a styled div representing the slider track.
 ###### Properties
 
 - `trackRef: (track: HTMLDivElement) => void`. Function attached to the HTML element.
+- `ariaLabel: string`. Current element tag.
 
 ### RangeBullet
 
@@ -114,6 +122,9 @@ The draggable bullets. It implements the logic to attach/detach styles dynamical
 - `handleRef: (HTMLDivElement) => void`. Function attached to the HTML element.
 - `handleMove: (increase: number) => void`. Function which triggers the movement.
 - `step: {left: number, right: number }`. Step a bullet must perform when the cursor is moved.
+- `ariaLabel: string`. Current element tag.
+- `zIndex: number`. Z index of the bullet.
+
 
 ### RangeInput
 
@@ -125,6 +136,9 @@ Component which renders an input in order to allow the user changing the slider 
 - `onChange: (event: React.ChangeEvent<HTMLInputElement>, key: 'start' | 'end') => void`. Function to trigger on changes.
 - `rangeKey: 'start' | 'end'`. If it is the input attached to the starting value or the ending value.
 - `disabled: boolean`. If the input is disabled.
+- `ariaLabel: string`. Current element tag.
+- `max: number`. Maximum value.
+- `min: number`. Minimun value.
 
 ###### State
 
@@ -259,6 +273,7 @@ You don’t have to ever use `eject`. The curated feature set is suitable for sm
 
 ## Next steps
 - **React Hooks**. This project can be updated with React Hooks in order to be easier to work with and to test, making the code cleaner and easier to read. One component was already implement using this technique.
+- **Touchpad**. Allow the user to change the slider via touch.
 
 ## Built With
 

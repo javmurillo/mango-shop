@@ -13,4 +13,5 @@ export interface RangeBulletProps {
     right: number;
   };
   ariaLabel?: string;
+  zIndex: number;
 }

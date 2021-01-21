@@ -7,7 +7,13 @@ afterEach(cleanup);
 
 const setup = () => {
   const utils = render(
-    <RangeInput value={50} rangeKey="start" ariaLabel="range-input" />
+    <RangeInput
+      value={50}
+      max={100}
+      min={0}
+      rangeKey="start"
+      ariaLabel="range-input"
+    />
   );
   const input = utils.getByLabelText('range-input');
   return {
@@ -23,12 +29,12 @@ describe('<RangeInput/> tests', () => {
     expect(input).toBeInTheDocument();
   });
 
-  test('should not override the input', () => {
+  test('value cant exceed max', () => {
     const { input } = setup();
 
     userEvent.type(input, '10');
 
-    expect(input).toHaveValue(5010);
+    expect(input).toHaveValue(50);
   });
 
   test('should allow numbers', () => {
@@ -61,6 +67,8 @@ describe('<RangeInput/> tests', () => {
     const input = render(
       <RangeInput
         value={50}
+        max={100}
+        min={0}
         rangeKey="start"
         ariaLabel="range-input"
         disabled={true}
@@ -72,7 +80,13 @@ describe('<RangeInput/> tests', () => {
 
   test('shoud match snapshot', () => {
     const testRendererJson = TestRenderer.create(
-      <RangeInput value={50} rangeKey="start" ariaLabel="range-input" />
+      <RangeInput
+        value={50}
+        max={100}
+        min={0}
+        rangeKey="start"
+        ariaLabel="range-input"
+      />
     ).toJSON();
     expect(testRendererJson).toMatchSnapshot();
   });

@@ -1,7 +1,6 @@
 {
-  "homepage": "http://javmurillo.github.io/mango-shop",
   "name": "mango-shop",
-  "version": "0.1.0",
+  "version": "2021.01.21",
   "private": true,
   "dependencies": {
     "@testing-library/jest-dom": "^5.11.9",

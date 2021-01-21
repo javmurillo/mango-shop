@@ -11,6 +11,7 @@ const setup = () => {
       offset="100"
       step={{ left: 0, right: 50 }}
       ariaLabel="range bullet"
+      zIndex={1}
     />
   );
   const rangeBullet = utils.getByLabelText('range bullet');
@@ -35,7 +36,12 @@ describe('<RangeBullet/> tests', () => {
 
   test('shoud match snapshot', () => {
     const testRendererJson = TestRenderer.create(
-      <RangeBullet factor={1} offset="100" step={{ left: 0, right: 50 }} />
+      <RangeBullet
+        factor={1}
+        offset="100"
+        step={{ left: 0, right: 50 }}
+        zIndex={1}
+      />
     ).toJSON();
     expect(testRendererJson).toMatchSnapshot();
   });

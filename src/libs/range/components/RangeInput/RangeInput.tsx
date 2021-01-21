@@ -35,10 +35,15 @@ const RangeInput: FC<RangeInputProps> = (props: RangeInputProps) => {
     const value = event.target.value;
 
     if (!isNaN(Number(value))) {
-      setValue(value);
-
-      if (props.onChange) {
-        props.onChange(event, props.rangeKey);
+      const startInputCanChange =
+        props.rangeKey === 'start' && Number(value) <= props.max;
+      const endInputCanChange =
+        props.rangeKey === 'end' && Number(value) >= props.min;
+      if (startInputCanChange || endInputCanChange) {
+        setValue(value);
+        if (props.onChange) {
+          props.onChange(event, props.rangeKey);
+        }
       }
     }
   };
