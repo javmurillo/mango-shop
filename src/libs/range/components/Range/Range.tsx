@@ -45,7 +45,6 @@ export default class Range extends Component<RangeProps, RangeState> {
         end: max,
       },
     };
-    console.log(this.state);
   }
 
   /**
