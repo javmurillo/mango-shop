@@ -15,7 +15,7 @@ export interface RangeDataState {
 /**
  * State initialization
  */
-const initialState: RangeDataState = {
+export const rangeDataInitialState: RangeDataState = {
   error: false,
 };
 
@@ -54,7 +54,7 @@ const fetchRangeDataFailed = (state: RangeDataState): RangeDataState => {
  * @param action RangeDataAction.
  */
 export const rangeDataReducer = (
-  state = initialState,
+  state = rangeDataInitialState,
   action: RangeDataAction
 ): RangeDataState => {
   switch (action.type) {

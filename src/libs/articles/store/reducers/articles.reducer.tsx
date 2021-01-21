@@ -17,7 +17,7 @@ export interface ArticlesState {
 /**
  * State initialization
  */
-const initialState: ArticlesState = {
+export const articlesInitialState: ArticlesState = {
   error: false,
 };
 
@@ -78,7 +78,7 @@ const filterArticles = (
  * @param action ArticlesAction.
  */
 export const articlesReducer = (
-  state = initialState,
+  state = articlesInitialState,
   action: ArticleAction
 ): ArticlesState => {
   switch (action.type) {
