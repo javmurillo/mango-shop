@@ -1,0 +1,22 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<RangeBullet/> tests shoud match snapshot 1`] = `
+<div
+  onMouseDown={[Function]}
+  onMouseEnter={[Function]}
+  onMouseLeave={[Function]}
+  style={
+    Object {
+      "backgroundColor": "black",
+      "border": "1px solid #052350",
+      "borderRadius": "50%",
+      "cursor": "grab",
+      "display": "inline-block",
+      "height": 30,
+      "left": "100",
+      "position": "absolute",
+      "width": 30,
+    }
+  }
+/>
+`;

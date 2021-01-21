@@ -13,10 +13,10 @@ const StyledLogo = styled.img`
  */
 export const MangoNavbar = (): JSX.Element => {
   return (
-    <Navbar bg="light" expand="lg">
+    <Navbar bg="light" expand="lg" aria-label="navbar">
       <Navbar.Brand>
         <a href="https://shop.mango.com/" target="_blank" rel="noreferrer">
-          <StyledLogo src={mangoLogo} alt="logo" />
+          <StyledLogo src={mangoLogo} alt="logo" aria-label="mango logo" />
         </a>
       </Navbar.Brand>
       <Navbar.Toggle aria-controls="basic-navbar-nav" />
@@ -25,6 +25,7 @@ export const MangoNavbar = (): JSX.Element => {
           <ul className="navbar-nav">
             <li className="nav-item">
               <NavLink
+                aria-label="exercise1"
                 activeClassName="active"
                 className="nav-link"
                 to="/exercise1"
@@ -35,6 +36,7 @@ export const MangoNavbar = (): JSX.Element => {
             </li>
             <li className="nav-item">
               <NavLink
+                aria-label="exercise2"
                 activeClassName="active"
                 className="nav-link"
                 to="/exercise2"
@@ -55,6 +57,7 @@ export const MangoNavbar = (): JSX.Element => {
           <StyledLogo
             src={process.env.PUBLIC_URL + '/github-logo.png'}
             alt="logo"
+            aria-label="github logo"
           />
         </a>
       </Navbar.Brand>

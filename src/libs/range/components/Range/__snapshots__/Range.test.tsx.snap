@@ -1,0 +1,87 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<RangeBullet/> tests shoud match snapshot 1`] = `
+<div
+  aria-label="range"
+  className="sc-jSgupP gpqVZN"
+>
+  <div
+    className="sc-gsTCUz ywWHk"
+  >
+    <input
+      className="sc-bdfBwQ iwQBvM"
+      min="0"
+      onChange={[Function]}
+      style={Object {}}
+      type="number"
+      value="0"
+    />
+    <span
+      className="sc-dlfnbm jjMaay"
+    >
+      €
+    </span>
+  </div>
+  <div
+    aria-label="range-slider"
+    className="sc-eCssSg bQcZvo"
+  >
+    <div
+      className="sc-hKgILt mbicC"
+    />
+    <div
+      onMouseDown={[Function]}
+      onMouseEnter={[Function]}
+      onMouseLeave={[Function]}
+      style={
+        Object {
+          "backgroundColor": "black",
+          "border": "1px solid #052350",
+          "borderRadius": "50%",
+          "cursor": "grab",
+          "display": "inline-block",
+          "height": 30,
+          "left": "0%",
+          "position": "absolute",
+          "width": 30,
+        }
+      }
+    />
+    <div
+      onMouseDown={[Function]}
+      onMouseEnter={[Function]}
+      onMouseLeave={[Function]}
+      style={
+        Object {
+          "backgroundColor": "black",
+          "border": "1px solid #052350",
+          "borderRadius": "50%",
+          "cursor": "grab",
+          "display": "inline-block",
+          "height": 30,
+          "left": "0%",
+          "position": "absolute",
+          "width": 30,
+        }
+      }
+    />
+  </div>
+  <div
+    className="sc-gsTCUz ywWHk"
+  >
+    <input
+      className="sc-bdfBwQ iwQBvM"
+      min="0"
+      onChange={[Function]}
+      style={Object {}}
+      type="number"
+      value="100"
+    />
+    <span
+      className="sc-dlfnbm jjMaay"
+    >
+      €
+    </span>
+  </div>
+</div>
+`;

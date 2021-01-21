@@ -1,0 +1,56 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<Article/> tests shoud match snapshot 1`] = `
+<div
+  aria-label="article-card"
+  className="sc-hKgILt iRatjO card"
+>
+  <img
+    className="card-img-top"
+    src="Test image"
+  />
+  <div
+    className="card-body"
+  >
+    <div
+      className="card-title h5"
+    >
+      Test article
+    </div>
+    <p
+      className="card-text"
+    >
+      Test description
+    </p>
+  </div>
+  <div
+    className="sc-eCssSg bUELJj card-footer"
+  >
+    <span
+      className="badge badge-success"
+    >
+      Deal of the day!
+    </span>
+  </div>
+  <div
+    className="text-muted card-footer"
+  >
+    <div
+      className="sc-bdfBwQ dHJFwu"
+    >
+      <span
+        className="sc-dlfnbm hsBRpN"
+      >
+        90
+         €
+      </span>
+      <span
+        className="sc-gsTCUz dACZDE"
+      >
+        75
+         €
+      </span>
+    </div>
+  </div>
+</div>
+`;

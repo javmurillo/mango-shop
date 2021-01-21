@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { FC, useEffect, useState } from 'react';
 import styled from 'styled-components';
 import { RangeInputProps } from './range-input-props.interface';
 
@@ -16,6 +16,7 @@ const StyledInputWrapper = styled.div`
 
 const StyledEuro = styled.span`
   font-weight: bold;
+  margin-right: 1rem;
 `;
 
 /**
@@ -23,19 +24,41 @@ const StyledEuro = styled.span`
  * Each change will update its parent state.
  * @param props RangeInputProps
  */
-export const RangeInput = (props: RangeInputProps) => {
+const RangeInput: FC<RangeInputProps> = (props: RangeInputProps) => {
+  const [internalValue, setValue] = useState(props.value.toString());
+
+  useEffect(() => {
+    setValue(props.value.toString());
+  }, [props.value]);
+
+  const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    const value = event.target.value;
+
+    if (!isNaN(Number(value))) {
+      setValue(value);
+
+      if (props.onChange) {
+        props.onChange(event, props.rangeKey);
+      }
+    }
+  };
+
   return (
     <StyledInputWrapper>
       <StyledInput
+        aria-label={props.ariaLabel}
         type="number"
-        value={props.value}
+        min="0"
+        value={internalValue}
         onChange={ev => {
-          props.onChange && props.onChange(ev, props.rangeKey);
+          handleChange(ev);
         }}
         style={props.disabled ? { cursor: 'not-allowed' } : {}}
         disabled={props.disabled}
       />
-      <StyledEuro style={{ marginRight: '1rem' }}>€</StyledEuro>
+      <StyledEuro>€</StyledEuro>
     </StyledInputWrapper>
   );
 };
+
+export default RangeInput;

@@ -1,0 +1,48 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<RangeSlider/> tests shoud match snapshot 1`] = `
+<div
+  aria-label="range-slider"
+  className="sc-gsTCUz ipuGXO"
+>
+  <div
+    className="sc-bdfBwQ cIBWvr"
+  />
+  <div
+    onMouseDown={[Function]}
+    onMouseEnter={[Function]}
+    onMouseLeave={[Function]}
+    style={
+      Object {
+        "backgroundColor": "black",
+        "border": "1px solid #052350",
+        "borderRadius": "50%",
+        "cursor": "grab",
+        "display": "inline-block",
+        "height": 30,
+        "left": "0%",
+        "position": "absolute",
+        "width": 30,
+      }
+    }
+  />
+  <div
+    onMouseDown={[Function]}
+    onMouseEnter={[Function]}
+    onMouseLeave={[Function]}
+    style={
+      Object {
+        "backgroundColor": "black",
+        "border": "1px solid #052350",
+        "borderRadius": "50%",
+        "cursor": "grab",
+        "display": "inline-block",
+        "height": 30,
+        "left": "0%",
+        "position": "absolute",
+        "width": 30,
+      }
+    }
+  />
+</div>
+`;

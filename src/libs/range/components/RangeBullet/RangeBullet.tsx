@@ -36,14 +36,6 @@ export default class RangeBullet extends Component<
   }
 
   /**
-   * Each time the props are update, style is recalculated.
-   * @param props RangeBulletProps
-   */
-  componentWillReceiveProps(props: RangeBulletProps): void {
-    this.style = this.getBulletStyle(this.state, props);
-  }
-
-  /**
    * @event onMouseEnter Hover style activated.
    */
   onMouseEnterBullet = (): void => {
@@ -137,7 +129,9 @@ export default class RangeBullet extends Component<
     const increment = direction > 0 ? 1 : -1;
     const directionStep = increment === 1 ? step.right : step.left;
     if (direction * distance > (factor || 1) * directionStep) {
-      handleMove(increment);
+      if (handleMove) {
+        handleMove(increment);
+      }
       this.currentPos! += factor * directionStep * increment;
     }
     this.lastPos = position;
@@ -178,8 +172,11 @@ export default class RangeBullet extends Component<
   }
 
   render(): JSX.Element {
+    this.style = this.getBulletStyle(this.state, this.props);
+
     return (
       <div
+        aria-label={this.props.ariaLabel}
         ref={this.props.handleRef}
         style={this.style}
         onMouseEnter={this.onMouseEnterBullet}
