@@ -168,6 +168,7 @@ export default class RangeBullet extends Component<
       ...calcFocusStyle,
       ...calcActiveStyle,
       left: offset,
+      zIndex: props.zIndex,
     };
   }
 

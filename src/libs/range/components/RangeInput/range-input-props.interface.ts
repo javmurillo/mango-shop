@@ -7,4 +7,6 @@ export interface RangeInputProps {
   rangeKey: 'start' | 'end';
   disabled?: boolean;
   ariaLabel?: string;
+  max: number;
+  min: number;
 }

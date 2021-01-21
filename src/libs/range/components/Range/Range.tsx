@@ -117,6 +117,8 @@ export default class Range extends Component<RangeProps, RangeState> {
         <RangeInput
           onChange={this.handleInputChange}
           value={this.state.rangeValue.start}
+          min={this.state.rangeValue.start}
+          max={this.state.rangeValue.end}
           rangeKey="start"
           disabled={this.props.disableInputs}
         ></RangeInput>
@@ -131,6 +133,8 @@ export default class Range extends Component<RangeProps, RangeState> {
         <RangeInput
           onChange={this.handleInputChange}
           value={this.state.rangeValue.end}
+          min={this.state.rangeValue.start}
+          max={this.state.rangeValue.end}
           rangeKey="end"
           disabled={this.props.disableInputs}
         ></RangeInput>

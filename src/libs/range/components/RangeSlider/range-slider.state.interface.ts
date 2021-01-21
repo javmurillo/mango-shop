@@ -5,4 +5,6 @@ export interface RangeSliderState {
   end: RangeState['rangeValue']['end'];
   handleSize?: number;
   trackLength?: number;
+  startIndexZ: number;
+  endIndexZ: number;
 }
