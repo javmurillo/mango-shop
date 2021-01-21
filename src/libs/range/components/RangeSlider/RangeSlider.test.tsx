@@ -38,7 +38,7 @@ describe('<RangeSlider/> tests', () => {
   });
 
   test('shoud match snapshot', () => {
-    const tree = TestRenderer.create(
+    const testRendererJson = TestRenderer.create(
       <RangeSlider
         min={0}
         max={100}
@@ -47,6 +47,6 @@ describe('<RangeSlider/> tests', () => {
         ariaLabel="range-slider"
       />
     ).toJSON();
-    expect(tree).toMatchSnapshot();
+    expect(testRendererJson).toMatchSnapshot();
   });
 });

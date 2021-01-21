@@ -21,7 +21,7 @@ describe('<RangeTrack/> tests', () => {
   });
 
   test('shoud match snapshot', () => {
-    const tree = TestRenderer.create(<RangeTrack />).toJSON();
-    expect(tree).toMatchSnapshot();
+    const testRendererJson = TestRenderer.create(<RangeTrack />).toJSON();
+    expect(testRendererJson).toMatchSnapshot();
   });
 });

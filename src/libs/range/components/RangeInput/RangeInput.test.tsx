@@ -71,9 +71,9 @@ describe('<RangeInput/> tests', () => {
   });
 
   test('shoud match snapshot', () => {
-    const tree = TestRenderer.create(
+    const testRendererJson = TestRenderer.create(
       <RangeInput value={50} rangeKey="start" ariaLabel="range-input" />
     ).toJSON();
-    expect(tree).toMatchSnapshot();
+    expect(testRendererJson).toMatchSnapshot();
   });
 });

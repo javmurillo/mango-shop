@@ -1,0 +1,93 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<Navbar/> tests shoud match snapshot 1`] = `
+<nav
+  aria-label="navbar"
+  className="navbar navbar-expand-lg navbar-light bg-light"
+>
+  <span
+    className="navbar-brand"
+  >
+    <a
+      href="https://shop.mango.com/"
+      rel="noreferrer"
+      target="_blank"
+    >
+      <img
+        alt="logo"
+        aria-label="mango logo"
+        className="sc-bdfBwQ WWxNV"
+        src="logo.svg"
+      />
+    </a>
+  </span>
+  <button
+    aria-controls="basic-navbar-nav"
+    aria-label="Toggle navigation"
+    className="navbar-toggler collapsed"
+    onClick={[Function]}
+    type="button"
+  >
+    <span
+      className="navbar-toggler-icon"
+    />
+  </button>
+  <div
+    aria-expanded={null}
+    className="navbar-collapse collapse"
+    id="basic-navbar-nav"
+  >
+    <div
+      className="mr-auto navbar-nav"
+      onKeyDown={[Function]}
+    >
+      <ul
+        className="navbar-nav"
+      >
+        <li
+          className="nav-item"
+        >
+          <a
+            aria-current={null}
+            aria-label="exercise1"
+            className="nav-link"
+            href="/exercise1"
+            onClick={[Function]}
+          >
+            Normal range
+          </a>
+        </li>
+        <li
+          className="nav-item"
+        >
+          <a
+            aria-current={null}
+            aria-label="exercise2"
+            className="nav-link"
+            href="/exercise2"
+            onClick={[Function]}
+          >
+            Fixed values range
+          </a>
+        </li>
+      </ul>
+    </div>
+  </div>
+  <span
+    className="navbar-brand"
+  >
+    <a
+      href="https://github.com/javmurillo/mango-shop"
+      rel="noreferrer"
+      target="_blank"
+    >
+      <img
+        alt="logo"
+        aria-label="github logo"
+        className="sc-bdfBwQ WWxNV"
+        src="/github-logo.png"
+      />
+    </a>
+  </span>
+</nav>
+`;

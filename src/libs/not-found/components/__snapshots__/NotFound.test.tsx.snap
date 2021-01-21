@@ -1,0 +1,18 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<NotFound/> tests shoud match snapshot 1`] = `
+<div
+  aria-label="not found"
+>
+  <nav
+    className="navbar navbar-expand navbar-light"
+  />
+  <div
+    aria-label="not found alert"
+    className="fade alert alert-dark show"
+    role="alert"
+  >
+    The page you are looking for was not found!
+  </div>
+</div>
+`;

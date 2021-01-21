@@ -23,10 +23,10 @@ describe('<Article/> tests', () => {
   });
 
   test('shoud match snapshot', () => {
-    const tree = TestRenderer.create(
+    const testRendererJson = TestRenderer.create(
       <Article article={testArticle} />
     ).toJSON();
-    expect(tree).toMatchSnapshot();
+    expect(testRendererJson).toMatchSnapshot();
   });
 });
 

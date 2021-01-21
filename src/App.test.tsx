@@ -1,10 +1,12 @@
 // app.test.js
 import '@testing-library/jest-dom/extend-expect';
-import { screen } from '@testing-library/react';
+import { cleanup, screen } from '@testing-library/react';
 import { createMemoryHistory } from 'history';
 import React from 'react';
 import App from './App';
 import { renderWithProviderAndRouter } from './utils/test.utils';
+
+afterEach(cleanup);
 
 describe('<App/> tests', () => {
   test('renders App', () => {
@@ -40,7 +42,7 @@ describe('<App/> tests', () => {
     expect(exercise2Element).toHaveClass('nav-link active');
   });
 
-  test('not found page shows an alert', () => {
+  test('not found page shows a dark alert', () => {
     const history = createMemoryHistory();
     history.push('/not-found');
     const utils = renderWithProviderAndRouter(<App />, {
