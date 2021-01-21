@@ -1,5 +1,5 @@
-import axios from 'axios';
 import { RangeData } from '../../models/range-data';
+import { getRangeData } from '../../services/range.service';
 
 import {
   FetchRangeDataFailedAction,
@@ -32,10 +32,11 @@ export const fetchRangeDataFailed = (): FetchRangeDataFailedAction => {
 /**
  * HTTP call to retrieve the range data.
  */
-export const initRangeData = () => {
+export const initRangeData = (): ((
+  dispatch: RangeDataDispatchType
+) => void) => {
   return (dispatch: RangeDataDispatchType) => {
-    axios
-      .get('https://demo4557431.mockable.io/range-data')
+    getRangeData()
       .then(response => {
         dispatch(setRangeData(response.data));
       })
