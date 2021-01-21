@@ -1,3 +1,4 @@
+
 # Mango Shop App[![Build Status](https://travis-ci.org/javmurillo/mango-shop.svg?branch=master)](https://travis-ci.org/javmurillo/mango-shop)
 
 Mango Shop App is a _Single-Page Application_ built with ReactJS + Redux with mocked HTTP calls via [mockable.io](https://www.mockable.io/a/). Users can use a dual price range slider in order to filter the articles shown in the gallery as a demo of the dispatched event.
@@ -116,7 +117,7 @@ The draggable bullets. It implements the logic to attach/detach styles dynamical
 
 ### RangeInput
 
-Stateless components which renders an input in order to allow the user changing the slider values without sliding the bullets.
+Component which renders an input in order to allow the user changing the slider values without sliding the bullets.
 
 ###### Properties
 
@@ -124,6 +125,10 @@ Stateless components which renders an input in order to allow the user changing 
 - `onChange: (event: React.ChangeEvent<HTMLInputElement>, key: 'start' | 'end') => void`. Function to trigger on changes.
 - `rangeKey: 'start' | 'end'`. If it is the input attached to the starting value or the ending value.
 - `disabled: boolean`. If the input is disabled.
+
+###### State
+
+- `value: number`. Input's value.
 
 ## Other components
 
@@ -198,6 +203,17 @@ error:  boolean;
 `FETCH_ARTICLES_FAILED`. Updates the state setting the error to `true`.
 `FILTER_ARTICLES`. Updates the state filtering the articles.
 
+## Solution and use case
+As a way to present the solution a gallery of articles was implemented with its own store and API calls. Every time the `Range` component emits a value the `cachedArticles` are filtered displaying the `articles` property of the component. While the HTTP request is pending, a spinner icon is shown.
+
+## Testing
+The are currently 15 test suites with 11 snapshots for a total 46 tests implemented which can be grouped as follows:
+
+- **Router tests**. They are mainly implemented in the `App.test.jsx` file. Here we test if the two pages renders correctly so the not found page, which must renders a dark alert.
+- **Store tests**. Implemented in the `articles.reducer.test.ts` file and `range-data.reducer.test.ts`. They validate the proper functioning of both reducers, dispatching every type of action.
+- **API tests**. . Implemented in the `articles.service.test.ts` file and `range.service.test.ts`. They validate the requests received by our mocked server.
+- **Components tests**. Implemented with every component in the project. They validate the correct rendering of every of them. Some components like `RangeInput` have a deeper testing in order to validate its behaviour for different inputs.
+
 ## Available Scripts
 
 In the project directory, you can run:
@@ -214,7 +230,8 @@ You will also see any lint errors in the console.
 
 ### `npm test`
 
-Launches the test runner in the interactive watch mode.
+The following command launches the test runner in the interactive watch mode.
+
 
 ### `npm run build`
 
@@ -238,11 +255,14 @@ Instead, it will copy all the configuration files and the transitive dependencie
 
 You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
 
+## Next steps
+- **React Hooks**. This project can be updated with React Hooks in order to be easier to work with and to test, making the code cleaner and easier to read. One component was already implement using this technique.
+
 ## Built With
 
 - [ReactJS](https://reactjs.org/) - JavaScript library for building user interfaces.
 - [Redux](https://redux.js.org/) - Open-source JavaScript library for managing application state
-- [TravisCI](https://travis-ci.org/) - Hosted, distributed continuous integration service used to build and test software projects hosted at GitHub
+- [TravisCI](https://travis-ci.com) - Hosted, distributed continuous integration service used to build and test software projects hosted at GitHub
 - [create-react-app](https://github.com/facebook/create-react-app) - Create React apps with no build configuration.
 - [React Bootstrap](https://react-bootstrap.github.io/) - Free and open-source front-end framework for designing websites and web applications.
 
