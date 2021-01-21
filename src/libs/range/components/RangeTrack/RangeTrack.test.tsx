@@ -1,5 +1,4 @@
 import { cleanup, render } from '@testing-library/react';
-import userEvent from '@testing-library/user-event';
 import TestRenderer from 'react-test-renderer';
 import { RangeTrack } from './RangeTrack';
 
@@ -7,17 +6,17 @@ afterEach(cleanup);
 
 const setup = () => {
   const utils = render(<RangeTrack ariaLabel="track" />);
-  const input = utils.getByLabelText('track');
+  const rangeTrack = utils.getByLabelText('track');
   return {
-    input,
+    rangeTrack,
     ...utils,
   };
 };
 
 describe('<RangeTrack/> tests', () => {
   test('renders correctly', () => {
-    const { input } = setup();
-    expect(input).toBeInTheDocument();
+    const { rangeTrack } = setup();
+    expect(rangeTrack).toBeInTheDocument();
   });
 
   test('shoud match snapshot', () => {

@@ -17,24 +17,24 @@ const setup = () => {
       ariaLabel="range-slider"
     />
   );
-  const input = utils.getByLabelText('range-slider');
+  const rangeSlider = utils.getByLabelText('range-slider');
   return {
-    input,
+    rangeSlider,
     ...utils,
   };
 };
 
 describe('<RangeSlider/> tests', () => {
   test('renders correctly', () => {
-    const { input } = setup();
+    const { rangeSlider } = setup();
 
-    expect(input).toBeInTheDocument();
+    expect(rangeSlider).toBeInTheDocument();
   });
 
   test('state initialized correctly', () => {
-    const { input } = setup();
+    const { rangeSlider } = setup();
 
-    expect(input).toBeInTheDocument();
+    expect(rangeSlider).toBeInTheDocument();
   });
 
   test('shoud match snapshot', () => {

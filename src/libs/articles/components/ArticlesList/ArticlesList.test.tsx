@@ -9,17 +9,17 @@ const setup = () => {
   const utils = render(
     <ArticlesList articlesList={testArticles} ariaLabel="articles-list" />
   );
-  const input = utils.getByLabelText('articles-list');
+  const articleList = utils.getByLabelText('articles-list');
   return {
-    input,
+    articleList,
     ...utils,
   };
 };
 
 describe('<ArticlesList/> tests', () => {
   test('renders correctly', () => {
-    const { input } = setup();
-    expect(input).toBeInTheDocument();
+    const { articleList } = setup();
+    expect(articleList).toBeInTheDocument();
   });
 
   test('shoud match snapshot', () => {

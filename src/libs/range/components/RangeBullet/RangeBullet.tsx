@@ -129,7 +129,9 @@ export default class RangeBullet extends Component<
     const increment = direction > 0 ? 1 : -1;
     const directionStep = increment === 1 ? step.right : step.left;
     if (direction * distance > (factor || 1) * directionStep) {
-      handleMove(increment);
+      if (handleMove) {
+        handleMove(increment);
+      }
       this.currentPos! += factor * directionStep * increment;
     }
     this.lastPos = position;
@@ -174,6 +176,7 @@ export default class RangeBullet extends Component<
 
     return (
       <div
+        aria-label={this.props.ariaLabel}
         ref={this.props.handleRef}
         style={this.style}
         onMouseEnter={this.onMouseEnterBullet}

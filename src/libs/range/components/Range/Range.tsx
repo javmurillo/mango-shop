@@ -44,7 +44,9 @@ export default class Range extends Component<RangeProps, RangeState> {
    */
   private onChange = (rangeValue: { start: number; end: number }): void => {
     this.setState({ rangeValue });
-    this.props.onChange(rangeValue.start, rangeValue.end);
+    if (this.props.onChange) {
+      this.props.onChange(rangeValue.start, rangeValue.end);
+    }
   };
 
   /**
@@ -89,17 +91,19 @@ export default class Range extends Component<RangeProps, RangeState> {
         },
       }),
       () => {
-        this.props.onChange(
-          this.state.rangeValue.start,
-          this.state.rangeValue.end
-        );
+        if (this.props.onChange) {
+          this.props.onChange(
+            this.state.rangeValue.start,
+            this.state.rangeValue.end
+          );
+        }
       }
     );
   };
 
   render(): JSX.Element {
     return (
-      <StyledMainRange>
+      <StyledMainRange aria-label={this.props.ariaLabel}>
         <RangeInput
           onChange={this.handleInputChange}
           value={this.state.rangeValue.start}
