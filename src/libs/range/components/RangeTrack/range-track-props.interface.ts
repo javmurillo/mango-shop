@@ -1,3 +1,4 @@
 export interface RangeTrackProps {
-  trackRef: (track: HTMLDivElement) => void;
+  trackRef?: (track: HTMLDivElement) => void;
+  ariaLabel?: string;
 }

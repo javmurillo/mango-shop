@@ -33,9 +33,10 @@ const RangeInput: FC<RangeInputProps> = (props: RangeInputProps) => {
 
   const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     const value = event.target.value;
-    setValue(value);
 
     if (!isNaN(Number(value))) {
+      setValue(value);
+
       if (props.onChange) {
         props.onChange(event, props.rangeKey);
       }
@@ -47,6 +48,7 @@ const RangeInput: FC<RangeInputProps> = (props: RangeInputProps) => {
       <StyledInput
         aria-label={props.ariaLabel}
         type="number"
+        min="0"
         value={internalValue}
         onChange={ev => {
           handleChange(ev);

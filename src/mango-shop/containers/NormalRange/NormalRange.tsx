@@ -1,6 +1,5 @@
 import { Component } from 'react';
 import { connect } from 'react-redux';
-import { ApplicationState } from '../../..';
 import { ArticlesList } from '../../../libs/articles/components/ArticlesList/ArticlesList';
 import { ArticleDispatchType } from '../../../libs/articles/models/articles.types';
 import {
@@ -12,6 +11,7 @@ import { initRangeData } from '../../../libs/range/store/actions/range-data.acti
 import { CustomSpinner } from '../../../libs/spinner/components/Spinner/Spinner';
 import { NormalRangeProps } from './normal-range-props.interface';
 import Range from '../../../libs/range/components/Range/Range';
+import { ApplicationState } from '../../../store/app.store';
 
 class NormalRange extends Component<NormalRangeProps> {
   componentDidMount() {

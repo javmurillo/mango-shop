@@ -36,14 +36,6 @@ export default class RangeBullet extends Component<
   }
 
   /**
-   * Each time the props are update, style is recalculated.
-   * @param props RangeBulletProps
-   */
-  componentWillReceiveProps(props: RangeBulletProps): void {
-    this.style = this.getBulletStyle(this.state, props);
-  }
-
-  /**
    * @event onMouseEnter Hover style activated.
    */
   onMouseEnterBullet = (): void => {
@@ -178,6 +170,8 @@ export default class RangeBullet extends Component<
   }
 
   render(): JSX.Element {
+    this.style = this.getBulletStyle(this.state, this.props);
+
     return (
       <div
         ref={this.props.handleRef}

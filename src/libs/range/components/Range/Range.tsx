@@ -112,6 +112,7 @@ export default class Range extends Component<RangeProps, RangeState> {
           step={this.props.step}
           rangeValue={this.state.rangeValue}
           onChange={this.onChange}
+          ariaLabel='range-slider'
         />
         <RangeInput
           onChange={this.handleInputChange}

@@ -6,5 +6,6 @@ export interface RangeSliderProps {
     start: number;
     end: number;
   };
-  onChange: (rangeValue: { start: number; end: number }) => void;
+  onChange?: (rangeValue: { start: number; end: number }) => void;
+  ariaLabel?: string;
 }

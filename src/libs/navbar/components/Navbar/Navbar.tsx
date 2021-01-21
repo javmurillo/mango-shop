@@ -25,6 +25,7 @@ export const MangoNavbar = (): JSX.Element => {
           <ul className="navbar-nav">
             <li className="nav-item">
               <NavLink
+                aria-label="exercise1"
                 activeClassName="active"
                 className="nav-link"
                 to="/exercise1"
@@ -35,6 +36,7 @@ export const MangoNavbar = (): JSX.Element => {
             </li>
             <li className="nav-item">
               <NavLink
+                aria-label="exercise2"
                 activeClassName="active"
                 className="nav-link"
                 to="/exercise2"

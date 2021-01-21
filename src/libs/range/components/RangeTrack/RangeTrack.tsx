@@ -16,5 +16,5 @@ const StyleTrack = styled.div`
  * @param props RangeTrackProps
  */
 export const RangeTrack = (props: RangeTrackProps) => {
-  return <StyleTrack ref={props.trackRef} />;
+  return <StyleTrack ref={props.trackRef} aria-label={props.ariaLabel} />;
 };

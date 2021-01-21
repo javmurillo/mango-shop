@@ -337,10 +337,12 @@ export default class RangeSlider extends Component<
   onChange = (start: number, end: number): void => {
     const parsedStart = Number(start.toFixed(2));
     const parsedEnd = Number(end.toFixed(2));
-    this.props.onChange({
-      start: parsedStart,
-      end: parsedEnd,
-    });
+    if (this.props.onChange) {
+      this.props.onChange({
+        start: parsedStart,
+        end: parsedEnd,
+      });
+    }
   };
 
   render(): JSX.Element {
@@ -348,7 +350,7 @@ export default class RangeSlider extends Component<
     let endValue = 0;
     let percentageFactor = 1;
     const { handleSize, trackLength, start, end } = this.state;
-    const { min, max } = this.props;
+    const { min, max, ariaLabel } = this.props;
     if (trackLength && handleSize) {
       // We get the track width
       const calculatedTrackWidth = trackLength - handleSize;
@@ -360,7 +362,7 @@ export default class RangeSlider extends Component<
       percentageFactor = 100 / trackLength;
     }
     return (
-      <StyledRangeSlider>
+      <StyledRangeSlider aria-label={ariaLabel}>
         <RangeTrack trackRef={this.setTrackDimensions} />
         <RangeBullet
           offset={`${startValue * percentageFactor}%`}
