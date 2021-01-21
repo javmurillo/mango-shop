@@ -1,4 +1,3 @@
-import axios from 'axios';
 import { Article } from '../../models/article';
 import {
   ArticleDispatchType,
@@ -9,6 +8,7 @@ import {
   SetArticlesAction,
   SET_ARTICLES,
 } from '../../models/articles.types';
+import { getArticles } from '../../services/articles.service';
 
 /**
  * @returns SetArticlesAction
@@ -53,8 +53,7 @@ export const filterArticles = (
  */
 export const initArticles = () => {
   return (dispatch: ArticleDispatchType) => {
-    axios
-      .get('https://demo4557431.mockable.io/articles')
+    getArticles()
       .then(response => {
         dispatch(setArticles(response.data));
       })
