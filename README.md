@@ -1,5 +1,5 @@
 
-# Mango Shop App[![Build Status](https://travis-ci.org/javmurillo/mango-shop.svg?branch=master)](https://travis-ci.org/javmurillo/mango-shop)
+# Mango Shop App[![Build Status](https://travis-ci.com/javmurillo/mango-shop.svg?branch=master)](https://travis-ci.com/javmurillo/mango-shop)
 
 Mango Shop App is a _Single-Page Application_ built with ReactJS + Redux with mocked HTTP calls via [mockable.io](https://www.mockable.io/a/). Users can use a dual price range slider in order to filter the articles shown in the gallery as a demo of the dispatched event.
 
