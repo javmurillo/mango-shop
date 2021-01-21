@@ -299,7 +299,7 @@ Instead, it will copy all the configuration files and the transitive dependencie
 You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
 
 ## Next steps
-- **React Hooks**. This project can be updated with React Hooks in order to be easier to work with and to test, making the code cleaner and easier to read. One component was already implement using this technique.
+- **React Hooks**. This project can be updated with React Hooks in order to be easier to work with and to test, making the code cleaner and easier to read. The `RangeInput` component was already implemented with this technique.
 - **Touchpad**. Allow the user to change the slider via touch.
 
 ## Built With
