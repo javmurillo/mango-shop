@@ -48,14 +48,6 @@ npm start
 
 ## Price Range Slider & Rationale
 
-There are three things that cause a React component to re-render:
-
-- The parent component re-rendered.
-- The method `this.setState()` is called.
-- The metod called `this.forceUpdate()` is called.
-
-In some components, the properties which doesn't have to re-render the component are set as global properties of that component.
-
 ![enter image description here](https://i.imgur.com/reXz5eM.png)
 
 ### Range
