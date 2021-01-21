@@ -1,7 +1,7 @@
 
 # Mango Shop App [![Build Status](https://travis-ci.com/javmurillo/mango-shop.svg?branch=master)](https://travis-ci.com/javmurillo/mango-shop)
 
-Mango Shop App is a _Single-Page Application_ built with React v17 + Redux with mocked HTTP calls via [mockable.io](https://www.mockable.io/a/). Users can use a dual price range slider in order to filter the articles shown in the gallery as a demo of the dispatched event.
+Mango Shop App is a _Single-Page Application_ built with React v17 (with TypeScript) + Redux with mocked HTTP calls via [mockable.io](https://www.mockable.io/a/). Users can use a dual price range slider in order to filter the articles shown in the gallery as a demo of the dispatched event.
 
 The aplication is live at https://javmurillo.github.io/mango-shop/ hosted by [GitHub Pages](https://pages.github.com/).
 
@@ -273,6 +273,7 @@ You don’t have to ever use `eject`. The curated feature set is suitable for sm
 
 ## Next steps
 - **React Hooks**. This project can be updated with React Hooks in order to be easier to work with and to test, making the code cleaner and easier to read. One component was already implement using this technique.
+- **Touchpad**. Allow the user to change the slider via touch.
 
 ## Built With
 
