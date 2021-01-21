@@ -1,6 +1,9 @@
-import { cleanup, render, screen } from '@testing-library/react';
+import { cleanup, render } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import RangeInput from './RangeInput';
+import TestRenderer from 'react-test-renderer';
+
+afterEach(cleanup);
 
 const setup = () => {
   const utils = render(
@@ -13,13 +16,64 @@ const setup = () => {
   };
 };
 
-describe('InvisibleInput operations', () => {
+describe('<RangeInput/> tests', () => {
+  test('renders correctly', () => {
+    const { input } = setup();
+
+    expect(input).toBeInTheDocument();
+  });
+
+  test('should not override the input', () => {
+    const { input } = setup();
+
+    userEvent.type(input, '10');
+
+    expect(input).toHaveValue(5010);
+  });
+
   test('should allow numbers', () => {
     const { input } = setup();
 
     userEvent.clear(input);
-    userEvent.type(input, '12');
+    userEvent.type(input, '10');
 
-    expect(input).toHaveValue(12);
+    expect(input).toHaveValue(10);
+  });
+
+  test('should not allow letters nor symbols', () => {
+    const { input } = setup();
+
+    userEvent.clear(input);
+    userEvent.type(input, 'test€');
+
+    expect(input).toHaveValue(null);
+  });
+
+  test('should allow to delete input', () => {
+    const { input } = setup();
+
+    userEvent.type(input, '{backspace}');
+
+    expect(input).toHaveValue(5);
+  });
+
+  test('should be disable', () => {
+    const input = render(
+      <RangeInput
+        value={50}
+        rangeKey="start"
+        ariaLabel="range-input"
+        disabled={true}
+      />
+    ).getByLabelText('range-input');
+
+    expect(input).toBeDisabled();
+  });
+
+  test('shoud match snapshot', () => {
+    const tree = TestRenderer.create(
+      <RangeInput value={50} rangeKey="start" ariaLabel="range-input" />
+    ).toJSON();
+    expect(tree).toMatchSnapshot();
   });
 });

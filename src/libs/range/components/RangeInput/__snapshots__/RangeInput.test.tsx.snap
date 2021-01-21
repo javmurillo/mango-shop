@@ -1,0 +1,22 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<RangeInput/> tests shoud match snapshot 1`] = `
+<div
+  className="sc-gsTCUz ywWHk"
+>
+  <input
+    aria-label="range-input"
+    className="sc-bdfBwQ iwQBvM"
+    min="0"
+    onChange={[Function]}
+    style={Object {}}
+    type="number"
+    value="50"
+  />
+  <span
+    className="sc-dlfnbm jjMaay"
+  >
+    €
+  </span>
+</div>
+`;
