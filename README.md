@@ -1,9 +1,9 @@
 
-# Mango Shop App[![Build Status](https://travis-ci.com/javmurillo/mango-shop.svg?branch=master)](https://travis-ci.com/javmurillo/mango-shop)
+# Mango Shop App [![Build Status](https://travis-ci.com/javmurillo/mango-shop.svg?branch=master)](https://travis-ci.com/javmurillo/mango-shop)
 
-Mango Shop App is a _Single-Page Application_ built with ReactJS + Redux with mocked HTTP calls via [mockable.io](https://www.mockable.io/a/). Users can use a dual price range slider in order to filter the articles shown in the gallery as a demo of the dispatched event.
+Mango Shop App is a _Single-Page Application_ built with React v17 + Redux with mocked HTTP calls via [mockable.io](https://www.mockable.io/a/). Users can use a dual price range slider in order to filter the articles shown in the gallery as a demo of the dispatched event.
 
-The apllication is live at https://javmurillo.github.io/mango-shop/ hosted by [GitHub Pages](https://pages.github.com/).
+The aplication is live at https://javmurillo.github.io/mango-shop/ hosted by [GitHub Pages](https://pages.github.com/).
 
 ![](https://i.imgur.com/Y1wNaQ7.gif)
 
@@ -206,13 +206,15 @@ error:  boolean;
 ## Solution and use case
 As a way to present the solution a gallery of articles was implemented with its own store and API calls. Every time the `Range` component emits a value the `cachedArticles` are filtered displaying the `articles` property of the component. While the HTTP request is pending, a spinner icon is shown.
 
-## Testing
+## Testing & CI
 The are currently 15 test suites with 11 snapshots for a total 46 tests implemented which can be grouped as follows:
 
 - **Router tests**. They are mainly implemented in the `App.test.jsx` file. Here we test if the two pages renders correctly so the not found page, which must renders a dark alert.
 - **Store tests**. Implemented in the `articles.reducer.test.ts` file and `range-data.reducer.test.ts`. They validate the proper functioning of both reducers, dispatching every type of action.
 - **API tests**. . Implemented in the `articles.service.test.ts` file and `range.service.test.ts`. They validate the requests received by our mocked server.
 - **Components tests**. Implemented with every component in the project. They validate the correct rendering of every of them. Some components like `RangeInput` have a deeper testing in order to validate its behaviour for different inputs.
+
+In order to ensure new pull requests do not break anything, this repository implements a pipeline which considers a build as passing if it completes the previous mentioned tests successfully as well as if it builds with no errors.
 
 ## Available Scripts
 
