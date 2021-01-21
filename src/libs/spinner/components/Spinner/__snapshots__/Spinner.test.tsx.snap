@@ -1,0 +1,31 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<NotFound/> tests shoud match snapshot 1`] = `
+<div
+  aria-label="spinner"
+>
+  <p
+    aria-label="error message"
+  >
+    Test error
+  </p>
+</div>
+`;
+
+exports[`<NotFound/> tests shoud match snapshot 2`] = `
+<div
+  aria-label="spinner"
+  className="sc-bdfBwQ dHJFwu"
+>
+  <div
+    className="sc-gsTCUz bGKjuf spinner-border"
+    role="status"
+  >
+    <span
+      className="sr-only"
+    >
+      Loading...
+    </span>
+  </div>
+</div>
+`;

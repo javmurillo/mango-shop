@@ -17,9 +17,11 @@ const StyledSpinner = styled(Spinner)`
  */
 export const CustomSpinner = (props: CustomSpinnerProps): JSX.Element => {
   return props.error ? (
-    <p>{props.message}</p>
+    <div aria-label="spinner">
+      <p aria-label="error message">{props.message}</p>
+    </div>
   ) : (
-    <StyledSpinnerWrapper>
+    <StyledSpinnerWrapper aria-label="spinner">
       <StyledSpinner animation="border" role="status">
         <span className="sr-only">Loading...</span>
       </StyledSpinner>
