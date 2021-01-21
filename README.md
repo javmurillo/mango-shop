@@ -1,7 +1,7 @@
 
 # Mango Shop App [![Build Status](https://travis-ci.com/javmurillo/mango-shop.svg?branch=master)](https://travis-ci.com/javmurillo/mango-shop)
 
-Mango Shop App is a _Single-Page Application_ built with React v17 (with TypeScript) + Redux with mocked HTTP calls via [mockable.io](https://www.mockable.io/a/). Users can use a dual price range slider in order to filter the articles shown in the gallery as a demo of the dispatched event.
+Mango Shop App is a _Single-Page Application_ built with React v17 (TypeScript) + Redux with mocked HTTP calls via [mockable.io](https://www.mockable.io/a/). Users can use a dual price range slider in order to filter the articles shown in the gallery as a demo of the dispatched event.
 
 The aplication is live at https://javmurillo.github.io/mango-shop/ hosted by [GitHub Pages](https://pages.github.com/).
 
@@ -53,7 +53,7 @@ npm start
 
 ### Range
 
-Main component of the slider. It wraps all the other components, passing them the necessary properties. It implements the logic in order to update the shown values if the user changes the inputs, as well as the function to emit the event which will comunicate a value from the rangeValue has changed (in our example, we will use this to filter the articles list).
+Main component of the slider. It wraps all the other components, passing them the necessary properties. It implements the logic responsible for updating the shown values if the user changes the inputs, as well as the function to emit the event which will comunicate a value has changed (in our example, we will use this to filter the articles list).
 
 ###### Properties
 
@@ -74,9 +74,9 @@ Main component of the slider. It wraps all the other components, passing them th
 
 Component which wraps the track and the bullets. It implements the necessary logic to render the RangeBullets where they must be, depending of the `startValue` and the calculated `percentageFactor`. It also saves a reference to the track via a `ref` in order to set the `trackLength` dynamically in its state.
 
-If a `step` array is provided, this component is able to calculate the steps every `RangeBullet`must perform (left and right), storing the the corresponding indexes which representes where every bullet is in the step array. Also, this component handles if a bullet will surpass the other one, avoiding the min value to be greather than the max.
+If a `step` array is provided, this component is able to calculate the steps that every `RangeBullet`must perform (left and right), storing the the corresponding indexes which representes where every bullet is in the step array. Also, this component handles if a bullet will surpass the other one, avoiding the min value to be greater than the max.
 
-Thanks to the `startIndexZ` and `endIndexZ` we can prevent the bullets from being stuck if they share the minimum/maximun value. The user could always drag the last bullet he moved.
+Thanks to the `startIndexZ` and `endIndexZ` we can prevent the bullets from being stuck if they share the minimum/maximun value. **The user could always drag the last bullet he moved**.
 
 ###### Properties
 
@@ -107,7 +107,7 @@ Stateless component which renders a styled div representing the slider track.
 
 ### RangeBullet
 
-The draggable bullets. It implements the logic to attach/detach styles dynamically depending of the occured mouse event. Thanks to the `currentPos` and `lastPost` property this component is able to calculate in what direciton the bullet is moving, as well if the movement was enough to actually move the bullet depending of the `step`.
+The draggable bullets. It implements the logic to attach/detach styles dynamically depending of the occured mouse event. Thanks to the `currentPos` and `lastPost` property this component is able to calculate in what direction the bullet is moving, as well as if the movement was enough to actually move the bullet depending of the `step`.
 
 ###### Properties
 
@@ -158,6 +158,7 @@ Stateless component which displays a card with the information about a given art
 - `img: string`. Image related to the article.
 - `currentPrice: number`. Article's current price.
 - `oldPrice: number`. Article's old price. Will be used to represent if an article is on offer.
+- `ariaLabel: string`. Current element tag.
 
 ### ArticlesList
 
@@ -166,6 +167,7 @@ Stateless component which displays a gallery of Articles. If the array is empty,
 ###### Properties
 
 - `articlesList: Article[]`. Array of articles.
+- `ariaLabel: string`. Current element tag.
 
 ### Spinner
 
@@ -219,6 +221,31 @@ error:  boolean;
 
 ## Solution and use case
 As a way to present the solution a gallery of articles was implemented with its own store and API calls. Every time the `Range` component emits a value the `cachedArticles` are filtered displaying the `articles` property of the component. While the HTTP request is pending, a spinner icon is shown.
+
+## API
+`GET /range-data`
+
+```
+{
+ "min": 0,
+ "max": 100,
+ "rangeValues": [9.99, 29.99, 39.99, 59.99, 79.99, 99.99]
+}
+```
+`GET /articles`
+```
+[
+  {
+    "id": "3731497f-2f4a-4ba1-ad5d-fc72739b810a",
+    "name": "Abrigo lana pelo desmontable",
+    "oldPrice": "79.99",
+    "currentPrice": "49.99",
+    "img": "https://st.mngbcn.com/rcs/pics/static/T7/fotos/S20/77069403_99.jpg",
+    "description": "Diseño medio. Diseño recto. Tejido mezcla de lana. Cuello de pelo sintético desmontable. Cuello clásico. Manga larga. Trabillas en los puños. Dos bolsillos laterales. Cierre de cremallera."
+  },
+  ...
+]
+```
 
 ## Testing & CI
 The are currently 15 test suites with 11 snapshots for a total 46 tests implemented which can be grouped as follows:
