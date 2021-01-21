@@ -1,6 +1,6 @@
 import { Article } from '../../models/article';
 
-export interface ArticlesListProps {
-  articlesList: Article[];
+export interface ArticleProps {
+  article: Article;
   ariaLabel?: string;
 }

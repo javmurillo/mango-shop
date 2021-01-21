@@ -1,6 +1,6 @@
 import { Badge, Card } from 'react-bootstrap';
 import styled from 'styled-components';
-import { Article as ArticleDto } from '../../models/article';
+import { ArticleProps } from './article-props.interface';
 
 const StyledPriceWrapper = styled.div`
   display: flex;
@@ -34,10 +34,10 @@ const StyledCardFooter = styled(Card.Footer)`
  * Article component which displays the article information.
  * @param props ArticleDto
  */
-export const Article = (props: { article: ArticleDto }): JSX.Element => {
+export const Article = (props: ArticleProps): JSX.Element => {
   const { article } = props;
   return (
-    <StyledCard>
+    <StyledCard aria-label="article-card">
       <Card.Img variant="top" src={article.img} />
       <Card.Body>
         <Card.Title>{article.name}</Card.Title>

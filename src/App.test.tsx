@@ -1,12 +1,9 @@
 // app.test.js
 import '@testing-library/jest-dom/extend-expect';
-import { render, screen } from '@testing-library/react';
+import { screen } from '@testing-library/react';
 import { createMemoryHistory } from 'history';
 import React from 'react';
-import { Provider } from 'react-redux';
-import { Router } from 'react-router-dom';
 import App from './App';
-import { store } from './store/app.store';
 import { renderWithProviderAndRouter } from './utils/test.utils';
 
 describe('<App/> tests', () => {

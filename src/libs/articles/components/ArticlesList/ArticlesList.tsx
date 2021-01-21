@@ -25,7 +25,7 @@ export const ArticlesList = (props: ArticlesListProps): JSX.Element => {
     );
   }
   return (
-    <StyledDiv className="row">
+    <StyledDiv className="row" aria-label={props.ariaLabel}>
       {props.articlesList.map((article: ArticleDto) => {
         return <Article article={article} key={article.id} />;
       })}
